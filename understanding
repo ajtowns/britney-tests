@@ -1,0 +1,12 @@
+ * Architecture all binary packages needs Sources contain Architecture: all
+   for the relevant source package.
+
+ * Source <-> Binary relations relies on "Source: X" in Packages_$arch (and
+   not "Binary" in Sources).
+
+ * (Build-)Depends are implied in the "INSTALL" file
+   - after building, do "the" britneymodule.so -> lib/britneymodule.so
+
+ * Run via:
+   ./britney.py -c etc/britney2.conf --control-files -v 2>&1
+
