@@ -1,0 +1,77 @@
+The britney test suite
+======================
+
+This is the test suite for the Debian Testing Migration Tool, britney.
+
+To run this, you will need:
+ * britney (or a clone thereof)
+   - including its dependencies :)
+ * perl
+   - Class::Accessor (libclass-accessor-perl)
+
+Running a test
+--------------
+
+To run a test, use:
+
+ $ bin/run-single-test <britney> <testset> <rundir> <test>
+
+where
+
+ - <britney> is the path to the britney executable.
+   - It will be passed "-c <conf> --control-files -v"
+ - <testset> is the testset (the t/ dir should do)
+ - <rundir> is where the runtime data is dumped
+   - this must not exists when running the command above
+ - <test> is the name of the test.
+
+Example:
+
+ $ bin/run-single-test britney2/britney.py t test-out basic
+
+The return code is 0 on success and 1 on error.
+
+Advanced topics
+===============
+
+Expected input for britney
+--------------------------
+
+ * britney.conf
+   - Will be generated (see perl-lib/BritneyTest::_gen_britney_conf)
+ * {testing,testing-proposed-updates,unstable}/Sources
+ * {testing,testing-proposed-updates,unstable}/BugsV
+ * {testing,testing-proposed-updates,unstable}/Hints/*
+ * {testing,testing-proposed-updates,unstable}/Packages_$arch
+   - one for each architecture
+ * FauxPackages
+ * testing/Dates
+ * testing/Urgency
+   
+
+Expected output from britney
+----------------------------
+
+ * HEIDI_OUTPUT
+   - specified in the britney.conf
+
+Currently only the Heidi output is compared to the "expected" result.
+
+Writing a test
+--------------
+
+No support yet, so all data files must be created manually
+(i.e. copy-waste from the "basic" test).
+
+The test must have a file called "expected" that shows the expected
+result.  It consists of zero or more lines of:
+
+ <name> <version> <arch-or-source>
+
+<name> is the name of the package, <version> is the version of the
+package and <arch-or-source> is the architecture of the package (for
+binary packages) or the word "source" (for source packages, without
+quotes).  Basically it is a Heidi file except the section.
+
+This file should be stored as "<testset>/<test>/expected".
+
