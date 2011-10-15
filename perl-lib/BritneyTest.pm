@@ -55,7 +55,7 @@ sub run {
 
     my ($as, $rs, $ab, $rb) = $exp->diff ($res);
     if (@$as + @$rs + @$ab + @$rb) {
-        _print_diff ($as, $rs, $ab, $rb);
+        #_print_diff ($as, $rs, $ab, $rb);
         return 0;
     }
     return 1;
