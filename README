@@ -9,12 +9,12 @@ To run this, you will need:
  * perl
    - Class::Accessor (libclass-accessor-perl)
 
-Running a test
---------------
+Running all the tests
+---------------------
 
-To run a test, use:
+To run all tests, use:
 
- $ bin/run-single-test <britney> <testset> <rundir> <test>
+ $ bin/runtests <britney> <testset> <rundir>
 
 where
 
@@ -23,13 +23,30 @@ where
  - <testset> is the testset (the t/ dir should do)
  - <rundir> is where the runtime data is dumped
    - this must not exists when running the command above
+
+The return code is 0 on success and 1 on error.
+
+Example
+
+ $ bin/runtests britney2/britney.py t test-out
+
+Running a single test
+---------------------
+
+To run a test, use:
+
+ $ bin/run-single-test <britney> <testset> <rundir> <test>
+
+Where
+ - <britney>, <testset> and <rundir> are described in the
+   section "Running all the tests" (above).
  - <test> is the name of the test.
+
+The return code is 0 on success and 1 on error.
 
 Example:
 
  $ bin/run-single-test britney2/britney.py t test-out basic
-
-The return code is 0 on success and 1 on error.
 
 Advanced topics
 ===============

@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+BEGIN {
+    my $dir = $ENV{'TEST_ROOT'}||'.';
+    $ENV{'TEST_ROOT'} = $dir;
+}
+
+use lib "$ENV{'TEST_ROOT'}/perl-lib";
+
+use BritneyTest;
+
+my ($britney, $TESTSET, $RUNDIR) = @ARGV;
+
+my @tests;
+my $failed = 0;
+
+mkdir $RUNDIR, 0777 or die "mkdir $RUNDIR: $!";
+opendir my $dd, $TESTSET or die "opendir $TESTSET: $!";
+@tests = grep { !/^\./o } readdir $dd;
+close $dd;
+
+foreach my $t (@tests) {
+    my $bt = BritneyTest->new ({}, "$RUNDIR/$t", "$TESTSET/$t");
+    $bt->setup;
+    $bt->run ($britney) or $failed++;
+}
+
+print 'N: Ran ' . scalar (@tests) . " tests\n";
+print "N: Failed tests: $failed\n";
+exit $failed ? 1 : 0;
