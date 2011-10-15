@@ -17,8 +17,11 @@ my ($britney, $TESTSET, $RUNDIR) = @ARGV;
 my @tests;
 my $failed = 0;
 
-mkdir $RUNDIR, 0777 or die "mkdir $RUNDIR: $!";
-opendir my $dd, $TESTSET or die "opendir $TESTSET: $!";
+die "Usage: $0 <britney> <testset> <rundir>"
+    unless $britney && $TESTSET && $RUNDIR;
+
+mkdir $RUNDIR, 0777 or die "mkdir $RUNDIR: $!\n";
+opendir my $dd, $TESTSET or die "opendir $TESTSET: $!\n";
 @tests = grep { !/^\./o } readdir $dd;
 close $dd;
 
