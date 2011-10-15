@@ -24,10 +24,17 @@ close $dd;
 
 foreach my $t (@tests) {
     my $bt = BritneyTest->new ({}, "$RUNDIR/$t", "$TESTSET/$t");
+    print "Running $t...";
     $bt->setup;
-    $bt->run ($britney) or $failed++;
+    if ($bt->run ($britney)) {
+        print "done\n";
+    } else {
+        print "FAILED\n";
+        $failed++;
+    }
 }
 
-print 'N: Ran ' . scalar (@tests) . " tests\n";
-print "N: Failed tests: $failed\n";
+print "\nSummery:\n";
+print 'Ran ' . scalar (@tests) . " tests\n";
+print "Failed tests: $failed\n";
 exit $failed ? 1 : 0;

@@ -9,6 +9,7 @@ use warnings;
 
 use Carp qw(croak);
 use Expectation;
+use SystemUtil;
 
 sub new {
     my ($class, $testdata, $rundir, $testdir) = @_;
@@ -28,7 +29,7 @@ sub setup {
     my $outputdir;
     mkdir $rundir, 0777 or croak "mkdir $rundir: $!";
     system ('rsync', '-a', "$testdir/", "$rundir/") == 0 or
-        croak "rsync failed: $?";
+        croak "rsync failed: " . (($?>>8) & 0xff);
     $outputdir = "$rundir/var/data/output";
     unless (-d $outputdir ) {
         mkdir $outputdir, 0777 or croak "mkdir $outputdir: $!";
@@ -43,10 +44,9 @@ sub run {
     my ($self, $britney) = @_;
     my $rundir = $self->rundir;
     my $conf = "$rundir/britney.conf";
-    print "---- BRITNEY ----\n";
-    system ($britney, '-c', $conf, '--control-files', '-v') == 0 or
-        croak "britney died with $?";
-    print "---- END BRITNEY ----\n";
+    system_file ("$rundir/log.txt", [$britney, '-c', $conf,
+                 '--control-files', '-v']) == 0 or
+                     croak "britney died with  ". (($?>>8) & 0xff);
     my $res = Expectation->new;
     my $exp = Expectation->new;
 
