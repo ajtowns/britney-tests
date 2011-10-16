@@ -1,0 +1,82 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use constant N => 20;
+
+my ($rundir) = @ARGV;
+
+open my $dates, '>', "$rundir/var/data/testing/Dates" or
+    die "open Dates: $!";
+open my $urgency, '>', "$rundir/var/data/testing/Urgency" or
+    die "open Urgency: $!";
+
+for (my $i = 0 ; $i < N ; $i++) {
+    print $dates "src-$i 1.0-1 1\n";
+    print $urgency "src-$i 1.0-1 low\n";
+}
+
+close $dates or die "close Dates: $!";
+close $urgency or die "close Urgency: $!";
+
+open my $pkgs, '>', "$rundir/var/data/unstable/Packages_i386" or
+    die "open Packages_i386: $!";
+
+# Add root package
+print $pkgs <<EOF ;
+Package: pkg-root
+Source: src-root
+Version: 1.0-1
+Maintainer: The R-Team <debian-release\@lists.debian.org>
+Architecture: i386
+Section: devel
+Description: nantoka nantoka
+
+EOF
+
+for (my $i = 0; $i < N ; $i++) {
+    my $dep = 'pkg-root';
+    $dep = 'pkg-' . ($i - 1) . ' (>= 1.0-1)' if $i;
+    print $pkgs <<EOF ;
+Package: pkg-$i
+Source: src-$i
+Version: 1.0-1
+Maintainer: The R-Team <debian-release\@lists.debian.org>
+Depends: $dep
+Architecture: i386
+Section: devel
+Description: nantoka nantoka
+
+EOF
+}
+
+close $pkgs or die "close Packages_i386: $!";
+
+# Sources
+open my $srcs, '>', "$rundir/var/data/unstable/Sources" or
+    die "open Sources: $!";
+
+# Add root package
+print $srcs <<EOF ;
+Package: src-root
+Binary: pkg-root
+Version: 1.0-1
+Maintainer: The R-Team <debian-release\@lists.debian.org>
+Section: devel
+
+EOF
+
+for (my $i = 0; $i < N ; $i++) {
+    print $srcs <<EOF ;
+Package: src-$i
+Binary: pkg-$i
+Version: 1.0-1
+Maintainer: The R-Team <debian-release\@lists.debian.org>
+Section: devel
+
+EOF
+}
+
+close $srcs or die "close Sources: $!";
+

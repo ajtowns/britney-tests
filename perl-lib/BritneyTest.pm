@@ -35,9 +35,10 @@ sub setup {
         mkdir $outputdir, 0777 or croak "mkdir $outputdir: $!";
     }
 
-
     $self->_gen_britney_conf ("$rundir/britney.conf", $self->{'testdata'},
                               "$rundir/var/data", "$outputdir");
+
+    $self->_hook ('post-setup');
 }
 
 sub run {
@@ -67,6 +68,14 @@ sub clean {
     system 'rm', '-r', $rundir == 0 or croak "rm -r $rundir failed: $?";
 }
 
+
+sub _hook {
+    my ($self, $hook) = @_;
+    my $rundir = $self->rundir;
+    return unless -x "$rundir/hooks/$hook";
+    system_file ("$rundir/$hook.log", ["$rundir/hooks/$hook", $rundir]) == 0
+        or croak "$hook hook died with  ". (($?>>8) & 0xff);
+}
 
 BritneyTest->mk_ro_accessors (qw(rundir testdir));
 
