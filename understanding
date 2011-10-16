@@ -10,3 +10,5 @@
  * Run via:
    ./britney.py -c etc/britney2.conf --control-files -v 2>&1
 
+Hint processing order:
+ easy and force-hints, main run, hints, auto-hints (easy)

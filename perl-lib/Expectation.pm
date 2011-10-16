@@ -23,6 +23,8 @@ sub read {
     open my $fd, '<', $file or croak "$file: $!";
     while (my $line = <$fd>) {
         chomp $line;
+        next if $line eq '';
+        next if $line =~ m/^\s*+#/o;
         ($pkg, $ver, $at) = split m/\s++/o, $line;
         $self->{'source'}->{"${pkg} ${ver}"} = 1 if $at eq 'source';
         $self->{'binary'}->{"${pkg} ${ver} ${at}"} = 1 if $at ne 'source';
