@@ -46,7 +46,7 @@ sub run {
     my $rundir = $self->rundir;
     my $conf = "$rundir/britney.conf";
     system_file ("$rundir/log.txt", [$britney, '-c', $conf,
-                 '--control-files', '-v']) == 0 or
+                 '--control-files', '-v', '--auto-hinter']) == 0 or
                      croak "britney died with  ". (($?>>8) & 0xff);
     my $res = Expectation->new;
     my $exp = Expectation->new;

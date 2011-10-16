@@ -19,7 +19,7 @@ To run all tests, use:
 where
 
  - <britney> is the path to the britney executable.
-   - It will be passed "-c <conf> --control-files -v"
+   - It will be passed "-c <conf> --control-files -v --auto-hinter"
  - <testset> is the testset (the t/ dir should do)
  - <rundir> is where the runtime data is dumped
    - this must not exists when running the command above
