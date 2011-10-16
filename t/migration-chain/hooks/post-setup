@@ -5,20 +5,14 @@ use warnings;
 
 use constant N => 20;
 
+use lib "$ENV{'TEST_ROOT'}/perl-lib";
+use TestLib;
+
 my ($rundir) = @ARGV;
+my $pkgs = [map { ["src-$_", '1.0-1'] } 0..N-1];
+push @$pkgs, ['src-root', '1.0-1'];
 
-open my $dates, '>', "$rundir/var/data/testing/Dates" or
-    die "open Dates: $!";
-open my $urgency, '>', "$rundir/var/data/testing/Urgency" or
-    die "open Urgency: $!";
-
-for (my $i = 0 ; $i < N ; $i++) {
-    print $dates "src-$i 1.0-1 1\n";
-    print $urgency "src-$i 1.0-1 low\n";
-}
-
-close $dates or die "close Dates: $!";
-close $urgency or die "close Urgency: $!";
+TestLib::gen_dates_urgencies ("$rundir/var/data/testing", $pkgs);
 
 open my $pkgs, '>', "$rundir/var/data/unstable/Packages_i386" or
     die "open Packages_i386: $!";
