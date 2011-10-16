@@ -1,0 +1,44 @@
+Package: leaf-a1
+Source: leaf-a1
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: root-1 (= 1.0-1), leaf-a2 (= 1.0-1)
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
+Package: leaf-a2
+Source: leaf-a2
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: root-1 (= 1.0-1), leaf-a1 (= 1.0-1)
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
+Package: leaf-b
+Source: leaf-b
+Version: 1.0-2
+Depends: root-1 (= 1.0-1)
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
+Package: root-1
+Source: root-1
+Version: 1.0-2
+Depends: root-2 (= 1.0-1)
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
+Package: root-2
+Source: root-2
+Version: 1.0-2
+Depends: root-1 (= 1.0-1)
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Description: la-dee-daa

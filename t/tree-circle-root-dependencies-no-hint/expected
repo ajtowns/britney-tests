@@ -1,0 +1,10 @@
+leaf-a1 1.0-2 i386
+leaf-a2 1.0-2 i386
+leaf-b 1.0-2 i386
+root-1 1.0-2 i386
+root-2 1.0-2 i386
+leaf-a1 1.0-2 source
+leaf-a2 1.0-2 source
+leaf-b 1.0-2 source
+root-1 1.0-2 source
+root-2 1.0-2 source
