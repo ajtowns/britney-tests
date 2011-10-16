@@ -1,9 +1,5 @@
-Package: some-src
-Version: 1.0-1
-Section: devel
-Maintainer: The R-Team <debian-release@lists.debian.org>
-
 Package: test-src
+Binary: test-bin1, test-bin2
 Version: 1.0-1
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
