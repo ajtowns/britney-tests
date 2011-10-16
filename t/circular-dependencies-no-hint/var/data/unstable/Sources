@@ -1,0 +1,14 @@
+Package: test-src
+Binary: test-bin
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Standards-Version: 3.9.2
+Section: devel
+
+Package: some-src
+Binary: some-bin
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Standards-Version: 3.9.2
+Section: devel
+
