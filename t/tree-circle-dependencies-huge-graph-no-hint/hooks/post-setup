@@ -10,13 +10,14 @@ use lib "$ENV{'TEST_ROOT'}/perl-lib";
 use TestLib;
 
 # Create an WIDTH x DEPTH matrix of packages
-# - all packages in a given row are in a circular dependency
-#   - M[i][j] depends on M[i][j-1] and it wraps around (M[i][0] depends on M[i][WIDTH-1])
 # - package depend directly on the package in the column "above" it (if any)
 #
 #  That is M[i][j] depends on M[i - 1][j] if i > 0 (or i > 1 of 1-index based notation :P)
 #
 # The name of each package is src-i-j (where i is the row and j the column of the package)
+#
+# Secondly, WIDTH/2 of each row are in a circular dependency - the rest depends on each other
+# in a line ending in the circle of the same row.
 
 my ($rundir) = @ARGV;
 {
@@ -40,14 +41,24 @@ foreach my $data (['testing', '1.0-1'], ['unstable', '1.0-2']) {
         die "open Packages_i386 ($suite): $!";
     open my $srcs, '>', "$rundir/var/data/$suite/Sources" or
         die "open Sources ($suite): $!";
+    open my $dot, '>', "$rundir/debug-deps-$suite.dot" or
+        die "open debug-deps-$suite.dot: $!";
+
+    print $dot "digraph \"$suite\" {\n";
 
     for my $i (0..DEPTH-1) {
         for my $j (0..WIDTH-1) {
             my $dep = '';
-            $dep .= "src-" . ($i - 1) . "-$j (= $version), " if ($i > 0);
-            $dep .= "src-$i-" . ($j - 1) . " (= $version)" if $j;
-            $dep .= "src-$i-" . (WIDTH-1) . " (= $version)" unless $j;
-            
+            my $dj = $j - 1;
+            $dj = WIDTH/2 - 1 unless $j;
+            if ($i > 0) {
+                $dep .= "src-" . ($i - 1) . "-$j (= $version), ";
+                print $dot "    \"src-$i-$j\" -> \"src-" . ($i - 1) . "-$j\";\n";
+            }
+            $dep .= "src-$i-$dj (= $version)";
+
+            print $dot "    \"src-$i-$j\" -> \"src-$i-$dj\";\n";
+
             print $pkgs <<EOF ;
 Package: src-$i-$j
 Source: src-$i-$j
@@ -68,8 +79,13 @@ Section: devel
 
 EOF
         }
+
+        print $dot "    { rank=same; \"" . join ('" "', map { "src-$i-$_" } 0..WIDTH-1) . "\"}\n";
     }
 
+    print $dot "\n}\n";
+
+    close $dot or die "close debug-deps-$suite.dot: $!";
     close $pkgs or die "close Packages_i386 ($suite): $!";
     close $srcs or die "close Sources ($suite): $!";
 }
