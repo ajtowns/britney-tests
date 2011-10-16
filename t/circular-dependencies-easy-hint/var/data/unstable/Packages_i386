@@ -1,0 +1,18 @@
+Package: test-bin
+Source: test-src
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: some-bin  (= 1.0-2)
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
+Package: some-bin
+Source: some-src
+Version: 1.0-2
+Depends: test-bin (= 1.0-2)
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
