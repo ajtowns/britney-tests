@@ -1,0 +1,5 @@
+Basic "x renamed to y with provides" case
+
+The test is a simple "package rename" case.  Its only reverse
+dependency (in testing) should still be satisfied due to the
+Provides in the renamed package.
