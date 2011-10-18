@@ -1,0 +1,21 @@
+Package: fbreader
+Architecture: i386
+Depends: libzltext0.10 (>= 0.10.7dfsg-4), libzlui-maemo (>= 0.10.7dfsg-4)
+Priority: optional
+Section: libs
+Version: 0.10.7dfsg-4
+
+Package: libzlui-maemo
+Architecture: i386
+Depends: libzltext0.10 (= 0.10.7dfsg-4)
+Priority: optional
+Section: libs
+Source: fbreader
+Version: 0.10.7dfsg-4
+
+Package: libzltext0.10
+Architecture: i386
+Priority: optional
+Section: libs
+Source: fbreader
+Version: 0.10.7dfsg-4

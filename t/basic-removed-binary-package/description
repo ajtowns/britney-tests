@@ -1,0 +1,10 @@
+Regression test (seen with fbreader)
+
+This is a regression test. The situation has been experienced with fbreader:
+src:fbreader dropped one of its binary packages in sid (say bin:A) but the
+other binary package bin:fbreader had a dependency on bin:A in testing only.
+This led britney2 to think that fbreader could not be removed without increasing
+the uninstallability count, which is false since the newer bin:fbreader dropped
+its dependency on bin:A in sid.
+
+This bug has been fixed in britney2.git:94071b16491e90d78605791a316141b58cc3c6fc

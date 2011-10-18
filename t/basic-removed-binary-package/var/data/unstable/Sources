@@ -1,0 +1,6 @@
+Package: fbreader
+Binary: fbreader, libzltext0.10
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Standards-Version: 3.9.2
+Section: libs
+Version: 0.10.7dfsg-5
