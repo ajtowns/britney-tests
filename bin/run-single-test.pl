@@ -16,7 +16,5 @@ unless ( -d $RUNDIR ) {
 
 my $bt = BritneyTest->new ({}, "$RUNDIR/$test", "$TESTSET/$test");
 $bt->setup;
-$bt->run ($britney);
-
-exit 0;
+$bt->run ($britney) or exit 1;
 
