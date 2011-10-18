@@ -1,0 +1,11 @@
+Test that the auto-hinter does not migrate "too young" packages
+
+In this test, a subset of the packages should migrate.  There is a
+huge group of packages ready to migrate.  However, there is also a
+large group of "young new" packages in sid that are related to this
+group.
+
+The group that is ready can migrate because the other packages are not
+already in testing.  The auto-hinter should see this and only migrate
+the packages that are "ready".
+

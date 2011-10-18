@@ -1,0 +1,8 @@
+Test that the auto-hinter does not break testing
+
+In this test, nothing should migrate.  There is a huge group of
+packages ready to migrate, but if they did, they would break a lot of
+packages already in testing.  If all packages from unstable were to
+migrate together there would not be an issue, but not all of them are
+ready to migrate (too young).
+

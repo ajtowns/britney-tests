@@ -19,7 +19,7 @@ To run all tests, use:
 where
 
  - <britney> is the path to the britney executable.
-   - It will be passed "-c <conf> --control-files -v --auto-hinter"
+   - It will be passed "-c <conf> --control-files -v --auto-hinter --compatible"
  - <testset> is the testset (the t/ dir should do)
  - <rundir> is where the runtime data is dumped
    - this must not exists when running the command above
@@ -47,6 +47,13 @@ The return code is 0 on success and 1 on error.
 Example:
 
  $ bin/run-single-test britney2/britney.py t test-out basic
+
+Understanding a test
+--------------------
+
+Some tests will have a description that explains what the test is
+about.  If available, it will be in <testset>/<test>/description
+which will be a plain text file.
 
 Advanced topics
 ===============

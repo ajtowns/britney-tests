@@ -1,0 +1,4 @@
+Simple chain of valid candidates that should migrate
+
+This test consist of a simple chain of candidates and britney should
+be able to realize that all of them can migrate.

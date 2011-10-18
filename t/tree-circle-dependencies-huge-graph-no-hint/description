@@ -1,0 +1,6 @@
+Test the auto-hinter is able to handle complex situations
+
+In this test, there is a large group of valid candidates with a
+complex relation.  The auto-hinter should be able to auto-hint
+all of these into testing.
+
