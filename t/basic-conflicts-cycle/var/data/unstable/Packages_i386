@@ -1,0 +1,16 @@
+Package: bin1
+Source: src1
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: bin2
+Conflicts: bin2 (<< 3.14)
+Architecture: i386
+Section: devel
+
+Package: bin2
+Source: src2
+Version: 3.14-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Conflicts: bin1 (<< 1.0-2)
+Architecture: i386
+Section: devel
