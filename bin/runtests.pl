@@ -64,7 +64,7 @@ foreach my $t (@tests) {
     print "$res\n";
 }
 
-print "\nSummery:\n";
+print "\nSummary:\n";
 print 'Ran ' . scalar (@tests) . " tests\n";
 print "Failed tests: $failed\n";
 exit $failed ? 1 : 0;
