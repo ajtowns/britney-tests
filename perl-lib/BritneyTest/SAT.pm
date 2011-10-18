@@ -5,7 +5,6 @@ use strict;
 use warnings;
 
 use base 'BritneyTest';
-use Class::ISA;
 
 sub _britney_cmdline {
     my ($self, $britney) = @_;
