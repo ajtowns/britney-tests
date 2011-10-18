@@ -4,3 +4,4 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Section: devel
 Description: la-dee-daa
+Architecture: i386

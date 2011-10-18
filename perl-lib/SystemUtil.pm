@@ -15,6 +15,7 @@ sub system_file {
     my $pid = open my $cd, '-|';
     my $res;
     die "fork failed: $!" unless defined $pid;
+    $ENV{PERLLIB} = join ':',@INC;
     unless ($pid) {
         # child - re-direct STDERR to STDOUT and exec
         close STDERR;

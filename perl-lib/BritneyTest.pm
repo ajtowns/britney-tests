@@ -56,7 +56,10 @@ sub run {
 
     my ($as, $rs, $ab, $rb) = $exp->diff ($res);
     if (@$as + @$rs + @$ab + @$rb) {
-        #_print_diff ($as, $rs, $ab, $rb);
+    	my $fd;
+    	open($fd,">","$rundir/diff") or croak $!;
+        _print_diff ($fd, $as, $rs, $ab, $rb);
+	close($fd);
         return 0;
     }
     return 1;
@@ -138,33 +141,33 @@ EOF
 }
 
 sub _print_diff {
-    my ($as, $rs, $ab, $rb) = @_;
+    my ($fd, $as, $rs, $ab, $rb) = @_;
     if (@$as) {
-        print "Added source packages:\n";
+        print $fd "Added source packages:\n";
         foreach my $added (@$as) {
             my @d = @$added;
-            print "  @d\n";
+            print $fd "  @d\n";
         }
     }
     if (@$rs) {
-        print "Removed source packages:\n";
+        print $fd "Removed source packages:\n";
         foreach my $removed (@$rs) {
             my @d = @$removed;
-            print "  @d\n";
+            print $fd "  @d\n";
         }
     }
     if (@$ab) {
-        print "Added binary packages:\n";
+        print $fd "Added binary packages:\n";
         foreach my $added (@$ab) {
             my @d = @$added;
-            print "  @d\n";
+            print $fd "  @d\n";
         }
     }
     if (@$rb) {
-        print "Removed binary packages:\n";
+        print $fd "Removed binary packages:\n";
         foreach my $removed (@$rb) {
             my @d = @$removed;
-            print "  @d\n";
+            print $fd "  @d\n";
         }
     }
 
