@@ -16,7 +16,7 @@ Section: devel
 Description: la-dee-daa
 
 Package: some-bin1
-Source: some-src
+Source: some-src (1.0-1)
 Version: 1.0-1+b1
 Depends: some-bin2
 Maintainer: The R-Team <debian-release@lists.debian.org>
@@ -25,7 +25,7 @@ Section: devel
 Description: la-dee-daa
 
 Package: some-bin2
-Source: some-src
+Source: some-src (1.0-1)
 Version: 1.0-1+b1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: test-bin1
