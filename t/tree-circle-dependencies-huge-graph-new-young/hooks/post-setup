@@ -37,8 +37,8 @@ my ($rundir) = @ARGV;
     close $ext or die "closing expected: $!";
 
     for my $i (0..NOT_READY-1) {
-        push @pkgs, ["young-$i", "1.0-1"];
-        $dates{"young-$i/1.0-1"} = $today;
+        push @pkgs, ["young-$i", "1.0-2"];
+        $dates{"young-$i/1.0-2"} = $today;
     }
 
     TestLib::gen_dates_urgencies ("$rundir/var/data/testing", \@pkgs, \%dates);
