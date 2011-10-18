@@ -19,7 +19,7 @@ To run all tests, use:
 where
 
  - <britney> is the path to the britney executable.
-   - It will be passed "-c <conf> --control-files -v --auto-hinter --compatible"
+   - It will be passed some options (see Britney-Style)
  - <testset> is the testset (the t/ dir should do)
  - <rundir> is where the runtime data is dumped
    - this must not exists when running the command above
@@ -55,6 +55,34 @@ Some tests will have a description that explains what the test is
 about.  If available, it will be in <testset>/<test>/description
 which will be a plain text file.
 
+
+Britney-Style
+=============
+
+The test suite natively supports two "britney styles".  The first one
+is "britney2" currently used in Debian (on release.debian.org) and the
+other is the experimental "SAT-britney".
+
+britney2
+--------
+
+The britney2 style is default and is called with:
+     -c <conf> --control-files -v --auto-hinter --compatible
+
+SAT-britney
+-----------
+
+The SAT-britney style is enabled by passing '--sat-britney' to the
+test runner and it is called with:
+
+
+     -d <rundir>/var/data --full-dependencies
+     --heidi <rundir>/var/data/output/HeidiResult
+     -a <archlist>
+
+Note that <archlist> is a comma-separated list of architectures.
+
+
 Advanced topics
 ===============
 
@@ -78,8 +106,15 @@ Expected output from britney
 
  * HEIDI_OUTPUT
    - specified in the britney.conf
+   - this is always <rundir>/<test>/var/data/output/HeidiResult
 
 Currently only the Heidi output is compared to the "expected" result.
+The test runner will generate a diff between the expected and the
+actual result in
+
+    <rundir>/<test>/diff
+
+if the test fails.
 
 Writing a test
 --------------
