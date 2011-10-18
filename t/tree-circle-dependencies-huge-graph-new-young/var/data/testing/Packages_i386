@@ -1,6 +1,0 @@
-Package: pkg-root
-Source: src-root
-Version: 1.0-1
-Maintainer: The R-Team <debian-release@lists.debian.org>
-Section: devel
-Description: la-dee-daa
