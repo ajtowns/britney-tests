@@ -43,11 +43,10 @@ sub setup {
 
 sub run {
     my ($self, $britney) = @_;
+    my $cmd = $self->_britney_cmdline ($britney);
     my $rundir = $self->rundir;
-    my $conf = "$rundir/britney.conf";
-    system_file ("$rundir/log.txt", [$britney, '-c', $conf,
-                 '--control-files', '-v', '--auto-hinter', '--compatible']) == 0 or
-                     croak "britney died with  ". (($?>>8) & 0xff);
+    system_file ("$rundir/log.txt", $cmd) == 0 or
+        croak "$britney died with  ". (($?>>8) & 0xff);
     my $res = Expectation->new;
     my $exp = Expectation->new;
 
@@ -69,6 +68,15 @@ sub clean {
     my ($self) = @_;
     my $rundir = $self->rundir;
     system 'rm', '-r', $rundir == 0 or croak "rm -r $rundir failed: $?";
+}
+
+sub _britney_cmdline {
+    my ($self, $britney) = @_;
+    my $rundir = $self->rundir;
+    my $conf = "$rundir/britney.conf";
+
+    return [$britney, '-c', $conf, '--control-files',
+            '-v', '--auto-hinter', '--compatible'];
 }
 
 

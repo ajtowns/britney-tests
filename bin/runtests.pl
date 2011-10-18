@@ -11,9 +11,31 @@ BEGIN {
 use lib "$ENV{'TEST_ROOT'}/perl-lib";
 
 use BritneyTest;
+use Getopt::Long;
 
+my %opt = (
+    'sat-britney' => 0,
+);
+my %opthash = (
+    'sat-britney!' => \$opt{'sat-britney'},
+);
+
+# init commandline parser
+Getopt::Long::config('bundling', 'no_getopt_compat', 'no_auto_abbrev');
+
+# process commandline options
+GetOptions(%opthash) or die("error parsing options\n");
+
+my $create_test = sub { return BritneyTest->new (@_); };
 my $ts;
 my $tf;
+
+if ($opt{'sat-britney'}) {
+    require BritneyTest::SAT;
+    $create_test = sub { return BritneyTest::SAT->new (@_); };
+    print "N: Using SAT-britney calling convention\n";
+}
+
 eval {
     require Time::HiRes;
     import Time::HiRes qw(gettimeofday tv_interval);
@@ -49,7 +71,7 @@ opendir my $dd, $TESTSET or die "opendir $TESTSET: $!\n";
 close $dd;
 
 foreach my $t (@tests) {
-    my $bt = BritneyTest->new ({}, "$RUNDIR/$t", "$TESTSET/$t");
+    my $bt = $create_test->({}, "$RUNDIR/$t", "$TESTSET/$t");
     my $res;
     print "Running $t...";
     $bt->setup;
