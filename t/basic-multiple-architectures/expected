@@ -1,0 +1,8 @@
+amd64-only 1.0-2 amd64
+arch-any 1.0-2 amd64
+arch-any 1.0-2 i386
+i386-ported 1.0-2 amd64
+i386-ported 1.0-2 i386
+amd64-only 1.0-2 source
+arch-any 1.0-2 source
+i386-ported 1.0-2 source

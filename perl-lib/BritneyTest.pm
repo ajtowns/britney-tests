@@ -35,6 +35,8 @@ sub setup {
         mkdir $outputdir, 0777 or croak "mkdir $outputdir: $!";
     }
 
+    $self->_read_test_data;
+
     $self->_gen_britney_conf ("$rundir/britney.conf", $self->{'testdata'},
                               "$rundir/var/data", "$outputdir");
 
@@ -89,6 +91,23 @@ sub _hook {
 }
 
 BritneyTest->mk_ro_accessors (qw(rundir testdir));
+
+sub _read_test_data {
+    my ($self) = @_;
+    my $rundir = $self->rundir;
+    my $dataf = "$rundir/test-data";
+    return unless -s $dataf;
+    open my $fd, '<', $dataf or croak "opening $dataf: $!";
+    while (my $line = <$fd> ) {
+        chomp ($line);
+        if ($line =~ m/^([^ \t:]+):\s*(\S(?:.*\S)?)\s*$/o) {
+            my ($opt,$value) = (lc $1, $2);
+            $self->{'testdata'}->{$opt} = $value
+                unless exists $self->{'testdata'}->{$opt};
+        }
+    }
+    close $fd;
+}
 
 sub _gen_britney_conf {
     my ($self, $file, $data, $datadir, $outputdir) = @_;

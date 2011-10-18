@@ -1,0 +1,9 @@
+Basic multiple architecture test
+
+In this test only two architectures are considered, i386 and amd64.
+
+Testing consists of 3 packages, one on both architectures and an
+architecture dependent on each.  All 3 have a newer version in
+unstable and the i386-only package has been ported to amd64, but
+the reverse is not true.
+

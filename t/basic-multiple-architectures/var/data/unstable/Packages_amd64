@@ -1,0 +1,23 @@
+Package: amd64-only
+Source: amd64-only
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: amd64
+Section: devel
+Description: la-dee-daa
+
+Package: arch-any
+Source: arch-any
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: amd64
+Section: devel
+Description: la-dee-daa
+
+Package: i386-ported
+Source: i386-ported
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: amd64
+Section: devel
+Description: la-dee-daa

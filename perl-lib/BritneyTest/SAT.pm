@@ -10,10 +10,11 @@ use Class::ISA;
 sub _britney_cmdline {
     my ($self, $britney) = @_;
     my $rundir = $self->rundir;
-
+    my $rawarchs = $self->{'testdata'}->{'architectures'}//'i386';
+    my $arch = join(',', split m/\s++/o, $rawarchs);
     return [$britney, '-d', "$rundir/var/data", '--full-dependencies',
             '--heidi', "$rundir/var/data/output/HeidiResult",
-            '-a', 'i386'];
+            '-a', $arch];
 
 }
 
