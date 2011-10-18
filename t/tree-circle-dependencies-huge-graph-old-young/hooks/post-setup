@@ -36,8 +36,8 @@ my ($rundir) = @ARGV;
     }
 
     for my $i (0..NOT_READY-1) {
-        push @pkgs, ["young-$i", "1.0-1"];
-        $dates{"young-$i/1.0-1"} = $today;
+        push @pkgs, ["young-$i", "1.0-2"];
+        $dates{"young-$i/1.0-2"} = $today;
         print $ext "young-$i 1.0-1 i386\n";
         print $ext "young-$i 1.0-1 source\n";
     }
