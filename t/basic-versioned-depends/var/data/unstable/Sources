@@ -1,0 +1,11 @@
+Package: src1
+Binary: bin1
+Version: 1.0-2
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+
+Package: src2
+Binary: bin2
+Version: 3.14-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>

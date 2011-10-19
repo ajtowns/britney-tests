@@ -1,0 +1,6 @@
+Test involving dependencies where a hint is needed
+
+bin1 (from src1) depends on bin2 (from src2), and vice versa.
+bin1 from unstable requires newer version of bin2 and bin2 from testing
+requires older version of bin1 only. In unstable, bin2 depends on newer
+version of bin1.
