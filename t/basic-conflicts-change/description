@@ -1,0 +1,5 @@
+Basic test involving various conflicts statements
+
+bin1 (from src1) depends on bin2 (from src2), in testing and unstable.
+bin1 from testing conflicts with the newer version of bin2 from unstable
+and bin1 from unstable conflicts with the older version of bin2 from testing.

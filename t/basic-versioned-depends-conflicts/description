@@ -1,0 +1,6 @@
+Test involving dependencies and a conflicts where a hint is needed
+
+bin1 (from src1) depends on bin2 (from src2).
+bin1 from unstable requires newer version of bin2 and bin2 from unstable
+conflicts with older version of bin1. In testing, bin1 has a non-versioned
+dependency on bin2.

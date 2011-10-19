@@ -1,0 +1,4 @@
+Conflicts statements with a cycle
+
+bin1 (from src1) depends on bin2 (from src2).
+In unstable, each one conflicts with older version of the other one.

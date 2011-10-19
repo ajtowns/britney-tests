@@ -1,0 +1,4 @@
+bin1 1.0-2 i386 devel
+bin2 3.14-1 i386 devel
+src1 1.0-2 source devel
+src2 3.14-1 source devel

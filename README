@@ -8,6 +8,7 @@ To run this, you will need:
    - including its dependencies :)
  * perl
    - Class::Accessor (libclass-accessor-perl)
+ * rsync
 
 Running all the tests
 ---------------------
@@ -67,7 +68,7 @@ britney2
 --------
 
 The britney2 style is default and is called with:
-     -c <conf> --control-files -v --auto-hinter --compatible
+     -c <conf> --control-files -v --auto-hinter
 
 SAT-britney
 -----------
