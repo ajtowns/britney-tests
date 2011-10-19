@@ -1,5 +1,6 @@
 Package: test-src
 Binary: test-binq, test-binp, test-binw, test-bina, test-binb, test-binc, test-bind, test-bina2, test-binb2, test-binc2, test-bind2
+Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Standards-Version: 3.9.2
 Section: devel
