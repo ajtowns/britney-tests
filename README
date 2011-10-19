@@ -8,6 +8,7 @@ To run this, you will need:
    - including its dependencies :)
  * perl
    - Class::Accessor (libclass-accessor-perl)
+ * rsync
 
 Running all the tests
 ---------------------
