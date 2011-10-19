@@ -68,7 +68,7 @@ britney2
 --------
 
 The britney2 style is default and is called with:
-     -c <conf> --control-files -v --auto-hinter --compatible
+     -c <conf> --control-files -v --auto-hinter
 
 SAT-britney
 -----------

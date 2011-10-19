@@ -78,7 +78,7 @@ sub _britney_cmdline {
     my $conf = "$rundir/britney.conf";
 
     return [$britney, '-c', $conf, '--control-files',
-            '-v', '--auto-hinter', '--compatible'];
+            '-v', '--auto-hinter'];
 }
 
 
