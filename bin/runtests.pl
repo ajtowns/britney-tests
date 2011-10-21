@@ -15,9 +15,11 @@ use Getopt::Long;
 
 my %opt = (
     'sat-britney' => 0,
+    'fixed-point' => 0,
 );
 my %opthash = (
     'sat-britney!' => \$opt{'sat-britney'},
+    'fixed-point'  => \$opt{'fixed-point'},
 );
 
 # init commandline parser
@@ -71,17 +73,22 @@ opendir my $dd, $TESTSET or die "opendir $TESTSET: $!\n";
 close $dd;
 
 foreach my $t (@tests) {
-    my $bt = $create_test->({}, "$RUNDIR/$t", "$TESTSET/$t");
+    my $o = {'fixed-point' => $opt{'fixed-point'}};
+    my $bt = $create_test->($o, "$RUNDIR/$t", "$TESTSET/$t");
     my $res;
     print "Running $t...";
     $bt->setup;
     my $t = $ts->();
-    if ($bt->run ($britney)) {
+    my ($suc, $iter) = $bt->run ($britney);
+    if ($suc) {
         $res = " done";
     } else {
         $res = " FAILED";
         $failed++;
     }
+    # Calculate the number of iterations used to find the result
+    #  (it takes at least one iteration to reach a fixed-point).
+    $res .= " [$iter iterations]" if $iter > 1;
     $res = $res . ( $tf->($t));
     print "$res\n";
 }
@@ -89,4 +96,4 @@ foreach my $t (@tests) {
 print "\nSummary:\n";
 print 'Ran ' . scalar (@tests) . " tests\n";
 print "Failed tests: $failed\n";
-exit $failed ? 1 : 0;
+exit ($failed ? 1 : 0);

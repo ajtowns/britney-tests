@@ -1,0 +1,14 @@
+Removal of left-over libraries from testing
+
+The left-over libray can trivially be removed by migrating all
+packages from unstable.
+
+However, some implementations may fail to realise this and will refuse
+to migrate "p" on the grounds that it breaks the left-over library.
+In "left-binary-removal" the implementation will be stuck there.
+
+This test allows implementations to migrate "q" (or "q" + "p") together
+to avoid breaking the left-over library.  Depending on the way the
+implementation works, this may take more than one iteration (thus it
+will fail if "--fixed-point" is not used).
+

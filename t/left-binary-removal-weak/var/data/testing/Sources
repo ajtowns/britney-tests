@@ -1,0 +1,18 @@
+Package: libmatroska
+Binary: libmatroska5
+Version: 1.0-1
+Section: libs
+Maintainer: The R-Team <debian-release@lists.debian.org>
+
+Package: vlc
+Binary: vlc
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+
+Package: p
+Binary: p
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+

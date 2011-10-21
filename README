@@ -15,7 +15,7 @@ Running all the tests
 
 To run all tests, use:
 
- $ bin/runtests <britney> <testset> <rundir>
+ $ bin/runtests [options] <britney> <testset> <rundir>
 
 where
 
@@ -134,4 +134,27 @@ binary packages) or the word "source" (for source packages, without
 quotes).  Basically it is a Heidi file except the section.
 
 This file should be stored as "<testset>/<test>/expected".
+
+Fixed-point
+-----------
+
+Some implementations may fail a test even though it would "eventually"
+solve it.  The test-suite can treat the britney implementation as an
+function that has an attractive fixed-point.  This allows the
+implementation a finite number of runs to eventually find a solution.
+
+In fixed-point mode, the test will finish when the implementation
+produces the same result twice (in a row).  Only the final result is
+considered and the implementation has to update the state of testing
+between each iteration.  Be adviced that each iteration starts without
+a HeidiResult file (like with the first iteration).
+
+To help debug the implementation, the test suite wil keep a copy of
+the heidi file, the diff to the right solution and the output log
+from each iteration.
+
+Fixed-point mode is enabled by passing "--fixed-point" to runtests.
+The output may change slightly change in this mode as the test runner
+prints how many iterations it took (if more than one) to find the
+fixed point.
 

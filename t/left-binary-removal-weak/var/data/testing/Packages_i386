@@ -1,0 +1,30 @@
+Package: libmatroska5
+Source: libmatroska
+Version: 1.0-1
+Section: libs
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+
+Package: libmatroska4
+Source: libmatroska
+Depends: p (= 1.0-1) | q (= 1.0-2)
+Version: 0.9-1
+Section: libs
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+
+Package: vlc
+Source: vlc
+Depends: libmatroska4
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+
+Package: p
+Source: p
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+

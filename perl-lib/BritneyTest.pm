@@ -47,23 +47,59 @@ sub run {
     my ($self, $britney) = @_;
     my $cmd = $self->_britney_cmdline ($britney);
     my $rundir = $self->rundir;
-    system_file ("$rundir/log.txt", $cmd) == 0 or
-        croak "$britney died with  ". (($?>>8) & 0xff);
-    my $res = Expectation->new;
+    my $testdata = $self->{'testdata'};
+    my $i = 0;
     my $exp = Expectation->new;
-
+    my $result = 0;
     $exp->read ("$rundir/expected");
-    $res->read ("$rundir/var/data/output/HeidiResult");
 
-    my ($as, $rs, $ab, $rb) = $exp->diff ($res);
-    if (@$as + @$rs + @$ab + @$rb) {
-    	my $fd;
-    	open($fd,">","$rundir/diff") or croak $!;
-        _print_diff ($fd, $as, $rs, $ab, $rb);
-	close($fd);
-        return 0;
+    while (1) {
+        system_file ("$rundir/log.txt", $cmd) == 0 or
+            croak "$britney died with  ". (($?>>8) & 0xff);
+        my $res = Expectation->new;
+        my $lres;
+        my $fixp = 0;
+
+        $res->read ("$rundir/var/data/output/HeidiResult");
+        if ( -e "$rundir/var/data/output/HeidiResult-$i") {
+            $lres = Expectation->new;
+            $lres->read ("$rundir/var/data/output/HeidiResult-$i");
+            $fixp = 1 unless $lres->diff ($res);
+        }
+
+        my ($as, $rs, $ab, $rb) = $exp->diff ($res);
+        # Always create the diff (even if it would be empty)
+        # - this allows people to trivally examine the diffs to the
+        #   real result at different points before the fixed-point
+        open(my $fd, '>', "$rundir/diff") or croak "opening $rundir/diff: $!";
+
+        if (@$as + @$rs + @$ab + @$rb) {
+            # Failed
+            _print_diff ($fd, $as, $rs, $ab, $rb);
+            $result = 0;
+        } else {
+            $result = 1;
+        }
+
+        close $fd or croak "closing $rundir/diff: $!";
+
+        if ($testdata->{'fixed-point'}) {
+            last if $fixp;
+            # not at a fixed point - prepare for the next point.
+            # We assume Britney updates $rundir/var/data/testing/
+            $i++;
+            rename "$rundir/var/data/output/HeidiResult", "$rundir/var/data/output/HeidiResult-$i"
+                or croak "rename HeidiResult -> HeidiResult-$i: $!";
+            rename "$rundir/log.txt", "$rundir/log-$i.txt"
+                or croak "rename log.txt -> log-$i.txt: $!";
+            rename "$rundir/diff", "$rundir/diff-$i"
+                or croak "rename log.txt -> log-$i.txt: $!";
+        } else {
+            # If we are not looking for a fixed-point then stop here.
+            last;
+        }
     }
-    return 1;
+    return wantarray ? ($result, $i) : $result;
 }
 
 sub clean {

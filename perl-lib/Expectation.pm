@@ -32,13 +32,21 @@ sub read {
     close $fd;
 }
 
+# Returns the differences in list context.  In scalar context
+# a truth value if they differ and a non-truth value if they
+# are identical.
 sub diff {
     my ($self, $other) = @_;
     # Copy the internal lists
     my @sd = _diff_hash_ref ($self->{'source'}, $other->{'source'});
     my @bd = _diff_hash_ref ($self->{'binary'}, $other->{'binary'});
 
-    return (@sd, @bd);
+    return (@sd, @bd) if wantarray;
+    my $d = 0;
+    foreach my $r ((@sd, @bd)) {
+        $d += @$r;
+    }
+    return $d;
 }
 
 sub _diff_hash_ref {
