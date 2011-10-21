@@ -10,7 +10,7 @@ Description: la-dee-daa
 Package: b
 Source: b
 Version: 1.1-1
-Depends: a
+Depends: a (>= 1.1)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
