@@ -1,0 +1,5 @@
+Packages a and b have to migrate together, although this is only visible by
+looking at the whole repository, e.g. a non-local condition.
+
+A bug prevents b from migrating, so a must not migrate either.
+
