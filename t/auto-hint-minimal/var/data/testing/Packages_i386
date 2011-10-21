@@ -1,6 +1,24 @@
+Package: a
+Source: a
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
 Package: b
 Source: b
 Version: 1.0-1
+Depends: a
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
+Package: c
+Source: c
+Version: 1.0-1
+Depends: b
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel

@@ -1,8 +1,8 @@
-a 1.0-1 i386
+a 1.1-1 i386
 b 1.1-1 i386
-c 1.0-1 i386
+c 1.1-1 i386
 z 1.0-1 i386
-a 1.0-1 source
+a 1.1-1 source
 b 1.1-1 source
-c 1.0-1 source
+c 1.1-1 source
 z 1.0-1 source

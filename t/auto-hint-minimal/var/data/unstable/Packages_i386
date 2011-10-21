@@ -1,6 +1,6 @@
 Package: a
 Source: a
-Version: 1.0-1
+Version: 1.1-1
 Breaks: b (<< 1.1)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
@@ -18,9 +18,8 @@ Description: la-dee-daa
 
 Package: c
 Source: c
-Version: 1.0-1
-Depends: b
-Breaks: z
+Version: 1.1-1
+Depends: b (>= 1.1)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
@@ -29,6 +28,7 @@ Description: la-dee-daa
 Package: z
 Source: z
 Version: 1.0-1
+Depends: c
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel

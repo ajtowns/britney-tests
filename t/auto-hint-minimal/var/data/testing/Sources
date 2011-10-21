@@ -1,5 +1,19 @@
+Package: a
+Binary: a
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Standards-Version: 3.9.2
+Section: devel
+
 Package: b
 Binary: b
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Standards-Version: 3.9.2
+Section: devel
+
+Package: c
+Binary: c
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Standards-Version: 3.9.2
