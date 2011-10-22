@@ -1,0 +1,6 @@
+Removal tests of a diamond shaped dep relation
+
+This test checks the ability to remove a simple diamond.  This is
+trivially possible to do by removing the bottom nodes then working up
+from there.
+

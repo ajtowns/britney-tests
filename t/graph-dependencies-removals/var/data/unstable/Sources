@@ -1,0 +1,7 @@
+Package: some-package
+Binary: some-package
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Standards-Version: 3.9.2
+Section: devel
+
