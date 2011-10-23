@@ -1,0 +1,6 @@
+Package: test-src
+Binary: test-bin-a-2, test-bin-b-2
+Version: 2.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+

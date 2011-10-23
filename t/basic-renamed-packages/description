@@ -1,0 +1,3 @@
+Test case involving a source package that renames all its binaries between
+testing and unstable, with unstable being buggy. No binary should be dropped,
+even though it does not exist in testing any more.
