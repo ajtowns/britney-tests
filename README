@@ -77,7 +77,7 @@ The SAT-britney style is enabled by passing '--sat-britney' to the
 test runner and it is called with:
 
 
-     -d <rundir>/var/data --full-dependencies
+     -d <rundir>/var/data
      --heidi <rundir>/var/data/output/HeidiResult
      -a <archlist>
 
