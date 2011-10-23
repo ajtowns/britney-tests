@@ -19,6 +19,8 @@ To run all tests, use:
 
 where
 
+ - [options] is a set of optional parameters.
+   - Run with "--help" for more information.
  - <britney> is the path to the britney executable.
    - It will be passed some options (see Britney-Style)
  - <testset> is the testset (the t/ dir should do)
@@ -36,10 +38,10 @@ Running a single test
 
 To run a test, use:
 
- $ bin/run-single-test <britney> <testset> <rundir> <test>
+ $ bin/run-single-test [options] <britney> <testset> <rundir> <test>
 
 Where
- - <britney>, <testset> and <rundir> are described in the
+ - [options], <britney>, <testset> and <rundir> are described in the
    section "Running all the tests" (above).
  - <test> is the name of the test.
 
@@ -77,8 +79,8 @@ The SAT-britney style is enabled by passing '--sat-britney' to the
 test runner and it is called with:
 
 
-     -d <rundir>/var/data
-     --heidi <rundir>/var/data/output/HeidiResult
+     -d <rundir>/<test>/var/data
+     --heidi <rundir>/<test>/var/data/output/HeidiResult
      -a <archlist>
 
 Note that <archlist> is a comma-separated list of architectures.
@@ -158,3 +160,5 @@ The output may change slightly change in this mode as the test runner
 prints how many iterations it took (if more than one) to find the
 fixed point.
 
+Note that --fixed-point is only guaranteed to terminate if the britney
+implementation behaves as a function with an attractive fixed point.
