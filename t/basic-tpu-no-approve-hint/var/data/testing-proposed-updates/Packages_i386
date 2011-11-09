@@ -1,0 +1,18 @@
+Package: some-bin1
+Source: some-src
+Version: 1.0-1+squeeze1
+Depends: some-bin2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
+Package: some-bin2
+Source: some-src
+Version: 1.0-1+squeeze1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: test-bin1
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
