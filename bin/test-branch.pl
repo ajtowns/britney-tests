@@ -158,7 +158,7 @@ against the tests in <testset> and their output will be stored in
 If both branches fail a given test, their output will be diffed to see
 if they produce the same output.
 
-The test runner will be using "git [--git-dir=$dir] checkout $branch"
+The test runner will be using "git [--git-dir=\$dir] checkout \$branch"
 to switch between branches.
 
  --sat-britney      Use the SAT-britney call style (defaults to britney2 style)
