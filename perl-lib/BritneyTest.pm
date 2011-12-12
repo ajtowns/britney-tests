@@ -75,7 +75,7 @@ sub run {
 
         if (@$as + @$rs + @$ab + @$rb) {
             # Failed
-            _print_diff ($fd, $as, $rs, $ab, $rb);
+            Expectation::print_diff ($fd, $as, $rs, $ab, $rb);
             $result = 0;
         } else {
             $result = 1;
@@ -201,39 +201,6 @@ SMOOTH_UPDATES = libs oldlibs
 
 EOF
     close $fd or croak "$file: $!";
-}
-
-sub _print_diff {
-    my ($fd, $as, $rs, $ab, $rb) = @_;
-    if (@$as) {
-        print $fd "Added source packages:\n";
-        foreach my $added (@$as) {
-            my @d = @$added;
-            print $fd "  @d\n";
-        }
-    }
-    if (@$rs) {
-        print $fd "Removed source packages:\n";
-        foreach my $removed (@$rs) {
-            my @d = @$removed;
-            print $fd "  @d\n";
-        }
-    }
-    if (@$ab) {
-        print $fd "Added binary packages:\n";
-        foreach my $added (@$ab) {
-            my @d = @$added;
-            print $fd "  @d\n";
-        }
-    }
-    if (@$rb) {
-        print $fd "Removed binary packages:\n";
-        foreach my $removed (@$rb) {
-            my @d = @$removed;
-            print $fd "  @d\n";
-        }
-    }
-
 }
 
 1;

@@ -75,5 +75,42 @@ sub _diff_hash_ref {
     return (\@added, \@removed);
 }
 
+
+# Expectation::print_diff ($fd, @diff)
+#
+# $fd is the file handle to write it to.
+# @diff is a diff returned by $a->diff ($b)
+sub print_diff {
+    my ($fd, $as, $rs, $ab, $rb) = @_;
+    if (@$as) {
+        print $fd "Added source packages:\n";
+        foreach my $added (@$as) {
+            my @d = @$added;
+            print $fd "  @d\n";
+        }
+    }
+    if (@$rs) {
+        print $fd "Removed source packages:\n";
+        foreach my $removed (@$rs) {
+            my @d = @$removed;
+            print $fd "  @d\n";
+        }
+    }
+    if (@$ab) {
+        print $fd "Added binary packages:\n";
+        foreach my $added (@$ab) {
+            my @d = @$added;
+            print $fd "  @d\n";
+        }
+    }
+    if (@$rb) {
+        print $fd "Removed binary packages:\n";
+        foreach my $removed (@$rb) {
+            my @d = @$removed;
+            print $fd "  @d\n";
+        }
+    }
+}
+
 1;
 
