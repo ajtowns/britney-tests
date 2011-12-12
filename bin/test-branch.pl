@@ -165,13 +165,17 @@ to switch between branches.
  --fixed-point      Calculate a fixed point before comparing the result.
  --orig-branch=<b>  The "original" branch (defaults to "master")
  --test-branch=<b>  The "new" branch
- --git-dir=<dir>    The "git-dir" (defaults to dirname(<britney>)/.git )
+ --git-dir=<dir>    The "git-dir" (defaults to dirname(<britney>)/.git)
 
 Note that --fixed-point is only guaranteed to terminate if the britney
 implementation behaves as a function with an attractive fixed point.
 
 Please refer to the README for more information on "britney call
 styles" and requirements for using "--fixed-point".
+
+Note: This will leave the git repository in the "new" branch if the
+run completes.  If the run is aborted (for whatever reason) the
+repository may be left in either the "original" or "new" branch.
 
 EOF
     exit 0;
