@@ -73,12 +73,17 @@ sub run {
         #   real result at different points before the fixed-point
         open(my $fd, '>', "$rundir/diff") or croak "opening $rundir/diff: $!";
 
-        if (@$as + @$rs + @$ab + @$rb) {
-            # Failed
-            Expectation::print_diff ($fd, $as, $rs, $ab, $rb);
-            $result = 0;
-        } else {
+        if (($testdata->{'ignore-expected'}//'') eq 'yes') {
+            # "Any" result is "ok"
             $result = 1;
+        } else {
+            if (@$as + @$rs + @$ab + @$rb) {
+                # Failed
+                Expectation::print_diff ($fd, $as, $rs, $ab, $rb);
+                $result = 0;
+            } else {
+                $result = 1;
+            }
         }
 
         close $fd or croak "closing $rundir/diff: $!";
@@ -106,6 +111,11 @@ sub clean {
     my ($self) = @_;
     my $rundir = $self->rundir;
     system 'rm', '-r', $rundir == 0 or croak "rm -r $rundir failed: $?";
+}
+
+sub testdata {
+    my ($self, $key) = @_;
+    return $self->{'testdata'}->{$key};
 }
 
 sub _britney_cmdline {

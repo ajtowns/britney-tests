@@ -87,22 +87,28 @@ close $dd;
 
 foreach my $t (@tests) {
     my %fail = ();
+    my $checkdiff = 0;
     print "Running $t";
     foreach my $reviewed ('orig', 'test') {
         my $o = {'fixed-point' => $opt{'fixed-point'}};
         my $bt;
         my $res;
+        my $ignore_expected;
         my $branch = $opt{"$reviewed-branch"};
         _checkout_branch ($opt{'git-dir'}, $branch);
         print " | $branch:";
         $bt = $create_test->($o, "$RUNDIR/$reviewed/$t", "$TESTSET/$t");
         $bt->setup;
+        $ignore_expected = ($bt->testdata ('ignore-expected')//'no') eq 'yes';
         my $t = $ts->();
         my ($suc, $iter) = $bt->run ($britney);
-        if ($suc) {
-            $res = " done";
+        if ($ignore_expected) {
+            $res = ' done';
+            $checkdiff = 1;
+        } elsif ($suc) {
+            $res = ' ok';
         } else {
-            $res = " FAILED";
+            $res = ' FAILED';
             $fail{$reviewed}++;
             $failed{$reviewed}++;
         }
@@ -116,8 +122,7 @@ foreach my $t (@tests) {
         print "$res";
     }
 
-    print "\n";
-    if ($fail{'orig'} && $fail{'test'}) {
+    if ($checkdiff || $fail{'orig'} && $fail{'test'}) {
         # they both failed, but did they produce the same result?
         my $ores = Expectation->new ();
         my $tres = Expectation->new ();
@@ -129,17 +134,20 @@ foreach my $t (@tests) {
         ($as, $rs, $ab, $rb) = $ores->diff ($tres);
         if (@$as + @$rs + @$ab + @$rb) {
             $diffs++;
-            print "$opt{'orig-branch'} and $opt{'test-branch'} both fail and produce different results on $t:\n";
-            Expectation::print_diff (\*STDOUT{IO}, $as, $rs, $ab, $rb);
+            print "| DIFF";
+            open my $fd, '>', "$RUNDIR/$t.diff" or die "opening $RUNDIR/$t.diff: $!";
+            Expectation::print_diff ($fd, $as, $rs, $ab, $rb);
+            close $fd or die "closing $RUNDIR/$t.diff: $!";
         }
     }
+    print "\n";
 }
 
 
 print "\nSummary:\n";
 print 'Ran ' . scalar (@tests) . " tests\n";
-print "$opt{'orig-branch'} failed $failed{'orig'} tests\n";
-print "$opt{'test-branch'} failed $failed{'test'} tests\n";
+print "$opt{'orig-branch'} failed $failed{'orig'} tests\n" if $failed{'orig'};
+print "$opt{'test-branch'} failed $failed{'test'} tests\n" if $failed{'test'};
 print "There were $diffs test(s) where the two branches both failed and produced different results\n"
     if $diffs;
 exit (($failed{'test'} || $diffs) ? 1 : 0);
