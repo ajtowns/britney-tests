@@ -70,7 +70,7 @@ britney2
 --------
 
 The britney2 style is default and is called with:
-     -c <conf> --control-files -v --auto-hinter
+     -c <conf> --control-files -v
 
 SAT-britney
 -----------

@@ -123,8 +123,7 @@ sub _britney_cmdline {
     my $rundir = $self->rundir;
     my $conf = "$rundir/britney.conf";
 
-    return [$britney, '-c', $conf, '--control-files',
-            '-v', '--auto-hinter'];
+    return [$britney, '-c', $conf, '--control-files', '-v'];
 }
 
 
