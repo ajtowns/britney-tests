@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+# Copyright 2011 Niels Thykier <niels@thykier.net>
+# License GPL-2 or (at your option) any later.
+
 use strict;
 use warnings;
 
