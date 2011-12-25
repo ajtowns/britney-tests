@@ -52,6 +52,9 @@ if ($opt{'sat-britney'}) {
     require BritneyTest::SAT;
     $create_test = sub { return BritneyTest::SAT->new (@_); };
     print "N: Using SAT-britney calling convention\n";
+} else {
+    print "N: Setting PYTHONDONTWRITEBYTECODE=1\n";
+    $ENV{'PYTHONDONTWRITEBYTECODE'} = 1;
 }
 
 my ($britney, $TESTSET, $RUNDIR) = @ARGV;
