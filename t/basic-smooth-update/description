@@ -1,0 +1,8 @@
+Basic smooth-update test
+
+A basic case for smooth updates (special handling for libraries to
+ease transitions).
+
+Britney migrates the library, but keeps the old library binaries
+(defined by section) that are still in use.
+

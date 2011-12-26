@@ -1,0 +1,8 @@
+binnmu-pkg 1.0-1+b1 i386
+libtest1 1.0-1 i386
+libtest2 2.0-1 i386
+ood-pkg 1.0-1 i386
+
+binnmu-pkg 1.0-1 source
+libtest 2.0-1 source
+ood-pkg 1.0-1 source
