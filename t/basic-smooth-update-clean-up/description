@@ -1,0 +1,10 @@
+Simple test that britney throws out old library binaries
+
+Once old "smooth-updated" binaries are no longer in use, britney
+should remove them.
+
+This starts in the state of "basic-smooth-update"'s expected end
+state, except the ood-pkg has been binnmu'ed.  Britney should migrate
+ood-pkg to testing and (then) libtest1, which is no longer used.
+
+

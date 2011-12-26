@@ -1,0 +1,28 @@
+Package: ood-pkg
+Section: devel
+Architecture: i386
+Version: 1.0-1
+Depends: libtest1 (>= 1.0)
+
+Package: libtest2
+Section: libs
+Architecture: i386
+Source: libtest
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 2.0-1
+
+Package: libtest1
+Section: libs
+Architecture: i386
+Source: libtest
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+
+Package: binnmu-pkg
+Section: devel
+Architecture: i386
+Source: binnmu-pkg (1.0-1)
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1+b1
+Depends: libtest2 (>= 2.0)
+
