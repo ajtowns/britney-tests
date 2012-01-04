@@ -1,0 +1,5 @@
+Simple test for "force-hint"
+
+A simple test for using "force-hint" to overrule Britney.  The
+particular result is not intended to make sense - only to test that
+the hint works.
