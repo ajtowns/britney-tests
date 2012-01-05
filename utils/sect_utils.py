@@ -19,7 +19,9 @@ ORDER_PKGS_FIELDS = ['Package',
 # Order of "faux" packages, which have (for some reason) a
 # different order.  We do not fix this because it makes it
 # harder to check the changes by this script.
-ORDER_PKGS_FIELDS_FAUX = ['Section',
+ORDER_PKGS_FIELDS_FAUX = ['Pre-Depends',
+                          'Depends',
+                          'Section',
                           'Version',
                           'Architecture',
                           'Provides',
