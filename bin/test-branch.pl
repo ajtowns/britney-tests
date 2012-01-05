@@ -107,6 +107,7 @@ foreach my $t (@tests) {
         $bt->setup;
         $ignore_expected = ($bt->testdata ('ignore-expected')//'no') eq 'yes';
         my $t = $ts->();
+        my $rt;
         my ($suc, $iter) = $bt->run ($britney);
         if ($ignore_expected) {
             $res = ' done';
@@ -118,14 +119,14 @@ foreach my $t (@tests) {
             $fail{$reviewed}++;
             $failed{$reviewed}++;
         }
-        $accrt{$reviewed} += $tf->($t);
+        $rt = $tf->($t);
+        $accrt{$reviewed} += $rt;
         # Calculate the number of iterations used to find the result
         #  (it takes at least one iteration to reach a fixed-point).
         if ($iter) {
             $it{$reviewed} += $iter;
         }
-        $res = $res;
-        print "$res";
+        printf ('%s (%.3fs)', $res, $rt);
     }
 
     if ($checkdiff || $fail{'orig'} && $fail{'test'}) {
