@@ -1,0 +1,5 @@
+Check multi-arch depends are detected
+
+Check to ensure britney does not "strip" the multi-arch part of a
+dependency.
+

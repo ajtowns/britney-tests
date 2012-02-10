@@ -1,0 +1,13 @@
+Package: test
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+
+
+Package: ma-pkg
+Version: 1.0-1
+Depends: test:amd64
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
