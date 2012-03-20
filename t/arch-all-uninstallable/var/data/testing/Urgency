@@ -1,2 +1,3 @@
-test-src 1.0-1 low
-some-src 1.0-1 low
+test-src 2.0-1 low
+some-src 2.0-1 low
+does-not-exist-on-amd64 1.0-1 low
