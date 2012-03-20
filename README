@@ -80,6 +80,7 @@ test runner and it is called with:
 
 
      -d <rundir>/<test>/var/data
+     --hints-dir <rundir>/<test>/var/data/unstable/Hints
      --heidi <rundir>/<test>/var/data/output/HeidiResult
      -a <archlist>
 

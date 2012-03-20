@@ -17,6 +17,7 @@ sub _britney_cmdline {
     my $rawarchs = $self->{'testdata'}->{'architectures'}//'i386';
     my $arch = join(',', split m/\s++/o, $rawarchs);
     return [$britney, '-d', "$rundir/var/data",
+    	    '--hints-dir', "$rundir/var/data/unstable/Hints",
             '--heidi', "$rundir/var/data/output/HeidiResult",
             '-a', $arch];
 
