@@ -50,7 +50,16 @@ unless ( -d $RUNDIR ) {
     mkdir $RUNDIR, 0777 or die "mkdir $RUNDIR: $!";
 }
 
-my $o = {'fixed-point' => $opt{'fixed-point'} };
+my @arches = ();
+for (glob "$TESTSET/$test/var/data/unstable/Packages_*") {
+    push @arches, $1 if /Packages_(.*)$/;
+}
+
+my $o = {
+    'fixed-point' => $opt{'fixed-point'},
+    'architectures' => (join " ", @arches),
+    'no-break-architectures' => (join " ", @arches),
+};
 my $bt = $create_test->($o, "$RUNDIR/$test", "$TESTSET/$test");
 $bt->setup;
 my ($res, $iter) = $bt->run ($britney);
