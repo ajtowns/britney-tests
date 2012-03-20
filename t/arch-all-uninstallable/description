@@ -1,0 +1,2 @@
+This test case has a binary arch-dep package which should not be upgraded, as a
+arch:all dependency is uninstallable on an architecute that is not i386.
