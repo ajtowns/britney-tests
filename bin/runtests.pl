@@ -64,18 +64,7 @@ opendir my $dd, $TESTSET or die "opendir $TESTSET: $!\n";
 close $dd;
 
 foreach my $t (@tests) {
-    # Determine architectures of the test
-    my @arches = ();
-    for (glob "$TESTSET/$t/var/data/unstable/Packages_*") {
-	push @arches, $1 if /Packages_(.*)$/;
-    }
-
-    my $o = {
-	'fixed-point' => $opt{'fixed-point'},
-	'architectures' => (join " ", @arches),
-	'no-break-architectures' => (join " ", @arches),
-	};
-
+    my $o = {'fixed-point' => $opt{'fixed-point'}};
     my $bt = $create_test->($o, "$RUNDIR/$t", "$TESTSET/$t");
     my $res;
     print "Running $t...";
