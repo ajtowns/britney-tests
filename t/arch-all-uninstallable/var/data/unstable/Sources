@@ -12,7 +12,7 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Standards-Version: 3.9.2
 Section: devel
 
-Source: does-not-exist-on-amd64
+Package: does-not-exist-on-amd64
 Binary: does-not-exist-on-amd64
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
