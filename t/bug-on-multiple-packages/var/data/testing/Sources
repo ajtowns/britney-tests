@@ -1,0 +1,11 @@
+Package: test-src
+Binary: test-bin1
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+
+Package: test-src-a
+Binary: test-bina
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>

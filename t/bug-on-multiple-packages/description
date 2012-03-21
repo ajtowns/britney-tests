@@ -1,0 +1,7 @@
+An rc bug is filed against _two_ packages, one of which is already in testing,
+the other wants to migrate.
+
+britney2 does not allow this migration, SAT-Britney does (since the bug is
+already in testing, nothing is getting worse). The test case takes britnes2’s
+behaviour as expected.
+
