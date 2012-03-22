@@ -7,7 +7,7 @@ Architecture: i386
 
 Package: libmatroska4
 Source: libmatroska
-Depends: p (= 1.0-1)
+Depends: bin-p (= 1.0-1)
 Version: 0.9-1
 Section: libs
 Maintainer: The R-Team <debian-release@lists.debian.org>
@@ -21,7 +21,7 @@ Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 
-Package: p
+Package: bin-p
 Source: p
 Version: 1.0-1
 Section: devel

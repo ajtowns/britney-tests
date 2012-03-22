@@ -7,20 +7,20 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 
 Package: vlc
 Source: vlc
-Depends: libmatroska5, p (= 1.0-2)
+Depends: libmatroska5, bin-p (= 1.0-2)
 Version: 1.0-2
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 
-Package: p
+Package: bin-p
 Source: p
 Version: 1.0-2
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 
-Package: q
+Package: bin-q
 Source: q
 Version: 1.0-2
 Section: devel

@@ -1,4 +1,4 @@
-Package: a
+Package: bin-a
 Source: a
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
@@ -6,25 +6,25 @@ Architecture: i386
 Section: devel
 Description: la-dee-daa
 
-Package: b
+Package: bin-b
 Source: b
 Version: 1.0-1
-Depends: a
+Depends: bin-a
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
 Description: la-dee-daa
 
-Package: c
+Package: bin-c
 Source: c
 Version: 1.0-1
-Depends: b
+Depends: bin-b
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
 Description: la-dee-daa
 
-Package: z
+Package: bin-z
 Source: z
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>

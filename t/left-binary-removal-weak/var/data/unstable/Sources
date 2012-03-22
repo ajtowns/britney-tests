@@ -11,13 +11,13 @@ Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
 
 Package: p
-Binary: p
+Binary: bin-p
 Version: 1.0-2
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
 
 Package: q
-Binary: q
+Binary: bin-q
 Version: 1.0-2
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
