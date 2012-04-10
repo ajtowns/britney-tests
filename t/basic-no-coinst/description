@@ -1,0 +1,5 @@
+This is a test case that tests the special feature of the transition tool that
+comes with the coinst suite by Jérôme Vouillon at
+darcs get http://www.pps.jussieu.fr/~vouillon/coinst/darcs/dev/
+
+Two binaries can be upgraded. Individually, everything is fine, but if both were upgraded, they would stop being uninstallable together.

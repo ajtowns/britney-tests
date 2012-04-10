@@ -1,0 +1,18 @@
+Package: test-bin1
+Source: test-src
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Conflicts: some-bin1
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
+
+Package: some-bin1
+Source: some-src
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Description: la-dee-daa
+
