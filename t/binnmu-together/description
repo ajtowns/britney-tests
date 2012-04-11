@@ -1,0 +1,2 @@
+This testcase checks that britney does not upgrade one binNMU of one source if
+the other one cannot migrate.
