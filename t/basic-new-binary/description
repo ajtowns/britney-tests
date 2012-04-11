@@ -1,0 +1,2 @@
+A new binary name appears in unstable, but should not migrate because another
+binary of the same source is buggy.
