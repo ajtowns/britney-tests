@@ -1,0 +1,4 @@
+Although a library package may remain in testing without its source, this must
+only happen when the source was upgraded. This test checks that the source is
+not removed if the source package is to be removed.
+

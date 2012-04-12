@@ -1,0 +1,14 @@
+Package: binnmu-pkg
+Binary: binnmu-pkg
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Standards-Version: 3.9.2
+Section: devel
+
+Package: ood-pkg
+Binary: ood-pkg
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Standards-Version: 3.9.2
+Section: devel
+
