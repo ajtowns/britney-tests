@@ -6,6 +6,7 @@ import apt_pkg
 ORDER_PKGS_FIELDS = ['Package',
                      'Source',
                      'Version',
+                     'Essential',
                      'Maintainer',
                      'Architecture',
                      'Provides',
