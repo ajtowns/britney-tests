@@ -1,0 +1,27 @@
+Package: p
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Depends: n | o1, n | o2
+
+Package: n
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Conflicts: o1, o2
+
+Package: o1
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+
+Package: q
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Depends: p, o1
+
