@@ -19,11 +19,13 @@ use Getopt::Long;
 my %opt = (
     'sat-britney' => 0,
     'fixed-point' => 0,
+    'keep-going'  => 0,
 );
 my %opthash = (
-    'sat-britney!' => \$opt{'sat-britney'},
-    'fixed-point'  => \$opt{'fixed-point'},
-    'help|h'       => \&_usage,
+    'sat-britney!'  => \$opt{'sat-britney'},
+    'fixed-point'   => \$opt{'fixed-point'},
+    'keep-going|k!' => \$opt{'keep-going'},
+    'help|h'        => \&_usage,
 );
 
 my $prog = $0;
@@ -50,6 +52,7 @@ my ($britney, $TESTSET, $RUNDIR) = @ARGV;
 
 my @tests;
 my $failed = 0;
+my $errors = 0;
 
 die "Usage: $prog <britney> <testset> <rundir>\n"
     unless $britney && $TESTSET && $RUNDIR;
@@ -70,8 +73,14 @@ foreach my $t (@tests) {
     print "Running $t...";
     $bt->setup;
     my $t = $ts->();
-    my ($suc, $iter) = $bt->run ($britney);
-    if ($suc) {
+    my ($suc, $iter);
+    eval { ($suc, $iter) = $bt->run ($britney); };
+    if ($@) {
+        print "ERROR: $@";
+        exit 2 if not $opt{'keep-going'};
+        $errors++;
+        next;
+    } elsif ($suc) {
         $res = " done";
     } else {
         $res = " FAILED";
@@ -87,7 +96,8 @@ foreach my $t (@tests) {
 print "\nSummary:\n";
 print 'Ran ' . scalar (@tests) . " tests\n";
 print "Failed tests: $failed\n";
-exit ($failed ? 1 : 0);
+print "Errors: $errors\n" if $errors;
+exit ($failed + $errors ? 1 : 0);
 
 ### functions ###
 
@@ -102,7 +112,10 @@ must not exists.
 
  --sat-britney   Use the SAT-britney call style (defaults to britney2 style)
  --fixed-point   Calculate a fixed point before comparing the result.
-
+ -k, --[no-]keep-going
+                 With --keep-going, the test continues even if Britney returns
+                 a non-zero error code.  Otherwise, it terminates on first
+                 error.
 
 Note that --fixed-point is only guaranteed to terminate if the britney
 implementation behaves as a function with an attractive fixed point.
