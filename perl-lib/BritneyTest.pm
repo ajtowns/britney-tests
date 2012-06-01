@@ -14,6 +14,17 @@ use Carp qw(croak);
 use Expectation;
 use SystemUtil;
 
+my $DEFAULT_ARCH = 'i386';
+my @AUTO_CREATE_EMPTY = (
+    'var/data/testing/Sources',
+    "var/data/testing/Packages_$DEFAULT_ARCH",
+    'var/data/testing-proposed-updates/Sources',
+    "var/data/testing-proposed-updates/Packages_$DEFAULT_ARCH",
+    'var/data/unstable/Sources',
+    "var/data/unstable/Packages_$DEFAULT_ARCH",
+    'hints/test-hints',
+);
+
 sub new {
     my ($class, $testdata, $rundir, $testdir) = @_;
     my $self = {
@@ -44,6 +55,19 @@ sub setup {
     }
 
     $self->_read_test_data;
+
+    foreach my $autogen (@AUTO_CREATE_EMPTY) {
+        my $f = "$rundir/$autogen";
+        my $dir;
+        next if -e $f;
+        $dir = $f;
+        $dir =~ s,/[^/]++$,,;
+        unless ( -d $dir) {
+            system ('mkdir', '-p', $dir) == 0 or croak "mkdir -p $dir failed";
+        }
+        open my $fd, '>', $f or croak "open $f: $!";
+        close $fd or croak "close $f: $!";
+    }
 
     $self->_gen_britney_conf ("$rundir/britney.conf", $self->{'testdata'},
                               "$rundir/var/data", "$outputdir");
@@ -165,8 +189,8 @@ sub _read_test_data {
 sub _gen_britney_conf {
     my ($self, $file, $data, $datadir, $outputdir) = @_;
 
-    my $archs   = $data->{'architectures'}//'i386';
-    my $nbarchs = $data->{'no-break-architectures'}//'i386';
+    my $archs   = $data->{'architectures'}//$DEFAULT_ARCH;
+    my $nbarchs = $data->{'no-break-architectures'}//$DEFAULT_ARCH;
     my $farchs  = $data->{'fucked-architectures'}//'';
     my $barchs  = $data->{'break-architectures'}//'';
 
