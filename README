@@ -123,20 +123,7 @@ if the test fails.
 Writing a test
 --------------
 
-No support yet, so all data files must be created manually
-(i.e. copy-waste from the "basic" test).
-
-The test must have a file called "expected" that shows the expected
-result.  It consists of zero or more lines of:
-
- <name> <version> <arch-or-source>
-
-<name> is the name of the package, <version> is the version of the
-package and <arch-or-source> is the architecture of the package (for
-binary packages) or the word "source" (for source packages, without
-quotes).  Basically it is a Heidi file except the section.
-
-This file should be stored as "<testset>/<test>/expected".
+Please refer to README.tests for more information on this topic.
 
 Fixed-point
 -----------

@@ -1,0 +1,97 @@
+Writing test cases
+==================
+
+A minimal test case consists of the following files:
+
+ * <testset>/<test>/var/data/{unstable,testing}/{Sources,Packages_$arch}
+   - Absent files will be created as empty files
+   - $arch defaults to i386 (configurable in the test-data file)
+ * <testset>/<test>/var/data/testing/{Urgency,Dates}
+   - Files containing urgency and upload dates for packages.
+ * <testset>/<test>/hints/test-hints
+   - Hint file for the test.
+   - If absent, it will be created as an empty file.
+ * <testset>/<test>/expected
+   - format documented below.
+ 
+There are a number of optional files that may also be useful:
+
+  * <testset>/<test>/test-data
+    - Change parameters, architectures etc.  See below.
+  * <testset>/<test>/description
+    - Used to document the purpose of the test.
+  * <testset>/<tests>/hooks/post-setup
+    - Script called after the test rundir has been created and the
+      files have been copied over.
+    - Can generate any of the files needed for the test except
+      test-data.
+  * <testset>/<tests>/var/data/{testing,}-proposed-updates/{Sources,Packages_$arch}
+    - The testing-proposed-updates files will be automatically generated as
+      empty files if not present.
+    - The proposed-updates files will merely be absent if not created by hand.
+
+The "expected" file
+-------------------
+
+The test must have a file called "expected" that shows the expected
+result.  It consists of zero or more lines of:
+
+ <name> <version> <arch-or-source>[ <section>]
+
+<name> is the name of the package, <version> is the version of the
+package and <arch-or-source> is the architecture of the package (for
+binary packages) or the word "source" (for source packages, without
+quotes).  Basically it is a HeidiResult file except the section.
+
+Note: It is permissible to include the section in the expected file,
+but they are ignored.  This means it is possible to use a HeidiResult
+file from a Britney run as an "expected" file.
+
+This file should be stored as "<testset>/<test>/expected".
+
+The "test-data" file
+--------------------
+
+The "test-data" can be used to configure various aspects of the test
+and is used to generate the resulting britney.conf file.
+
+The syntax of the "test-data" file is the same syntax as used by
+the Debian Control files (Policy §5.1).  Unless otherwise started
+all fields are "simple" (i.e. restricted to a single line).
+
+The following fields are available:
+
+ * Architectures
+   - space separated list of architectures enabled in this test.
+   - defaults to: i386
+   - Used to generate the britney.conf file
+   - NB: This is used to auto-generate empty Packages_$arch files.
+ * No-Break-Architectures
+   - space separated list of "NOBREAKALL" architectures enabled in this test.
+   - Used to generate the britney.conf file
+   - defaults to: i386
+ * Fucked-Architectures
+   - space separated list of "FUCKED_ARCHES" architectures enabled in this test.
+   - Used to generate the britney.conf file
+   - defaults to: <empty>
+ * Break-Architectures
+   - space separated list of "BREAK_ARCHES" architectures enabled in this test.
+   - Used to generate the britney.conf file
+   - defaults to: <empty>
+
+The "post-setup" hook
+---------------------
+
+The "post-setup" hook should be an executable script.  It will called with
+the path to the rundir of the test it is in.  When it is called, all files
+have been copied over and auto-generatable files will have been generated
+(including the britney.conf file).
+
+It may create/modify/delete any file except "test-data"[1] as it pleases,
+including (but not limited to) the "expected" file.
+
+The hook must exit 0 or the test will abort.
+
+[1] It can modify "test-data", but the test-runner will not reload it so it
+will merely create undesired results.
+
