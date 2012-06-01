@@ -17,11 +17,11 @@ use SystemUtil;
 my $DEFAULT_ARCH = 'i386';
 my @AUTO_CREATE_EMPTY = (
     'var/data/testing/Sources',
-    "var/data/testing/Packages_$DEFAULT_ARCH",
+    'var/data/testing/Packages_@ARCH@',
     'var/data/testing-proposed-updates/Sources',
-    "var/data/testing-proposed-updates/Packages_$DEFAULT_ARCH",
+    'var/data/testing-proposed-updates/Packages_@ARCH@',
     'var/data/unstable/Sources',
-    "var/data/unstable/Packages_$DEFAULT_ARCH",
+    'var/data/unstable/Packages_@ARCH@',
     'hints/test-hints',
 );
 
@@ -57,18 +57,28 @@ sub setup {
     $self->_read_test_data;
 
     foreach my $autogen (@AUTO_CREATE_EMPTY) {
-        my $f = "$rundir/$autogen";
-        my $dir;
-        next if -e $f;
-        $dir = $f;
-        $dir =~ s,/[^/]++$,,;
-        unless ( -d $dir) {
-            system ('mkdir', '-p', $dir) == 0 or croak "mkdir -p $dir failed";
+        my @subst = (''); #do once
+        my $dosubst = 0;
+        if ($autogen =~ m/\@ARCH\@/) {
+            # ... per architecture
+            @subst = split m/\s++/, $self->{'testdata'}->{'architectures'} // $DEFAULT_ARCH;
+            $dosubst = 1;
         }
-        open my $fd, '>', $f or croak "open $f: $!";
-        close $fd or croak "close $f: $!";
-    }
+        foreach my $a (@subst) {
+            my $f = "$rundir/$autogen";
+            my $dir;
+            $f =~ s/\@ARCH\@/$a/ if $dosubst;
 
+            next if -e $f;
+            $dir = $f;
+            $dir =~ s,/[^/]++$,,;
+            unless ( -d $dir ) {
+                system ('mkdir', '-p', $dir) == 0 or croak "mkdir -p $dir failed";
+            }
+            open my $fd, '>', $f or croak "open $f: $!";
+            close $fd or croak "close $f: $!";
+        }
+    }
     $self->_gen_britney_conf ("$rundir/britney.conf", $self->{'testdata'},
                               "$rundir/var/data", "$outputdir");
 
