@@ -2,7 +2,6 @@ Package: test-bin1
 Source: test-src
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Depends: test-bin2
 Architecture: i386
 Section: devel
 Description: la-dee-daa
