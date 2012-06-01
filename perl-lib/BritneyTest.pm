@@ -30,12 +30,17 @@ sub setup {
     my $rundir = $self->rundir;
     my $testdir = $self->testdir;
     my $outputdir;
+    my $hintlink;
     mkdir $rundir, 0777 or croak "mkdir $rundir: $!";
     system ('rsync', '-a', "$testdir/", "$rundir/") == 0 or
         croak "rsync failed: " . (($?>>8) & 0xff);
     $outputdir = "$rundir/var/data/output";
     unless (-d $outputdir ) {
         mkdir $outputdir, 0777 or croak "mkdir $outputdir: $!";
+    }
+    $hintlink = "$rundir/var/data/unstable/Hints";
+    unless ( -d "$hintlink/" ) {
+        symlink "$rundir/hints", $hintlink or croak "symlink $hintlink -> $rundir/hints: $!";
     }
 
     $self->_read_test_data;
