@@ -1,0 +1,8 @@
+Case where Britney is allowed to migrate broken packages
+
+Britney is allowed to migrate a source package as long as it is a
+valid candidate and the overall installability is as good as it was
+before.
+
+In this case, by migrating some-src Britney can trade a broken
+test-bin2 (in testing) for a broken some-bin2 (migrating).
