@@ -1,0 +1,4 @@
+Case where a new version in sid drops a binary, but the old binary
+has not been removed from sid.
+
+
