@@ -1,0 +1,13 @@
+Package: foo
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Built-Using: bar (= 2.0-1)
+Version: 1.0-1+b1
+
+Package: bar
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+

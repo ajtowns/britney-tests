@@ -1,0 +1,18 @@
+Package: foo
+Binary: foo
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+
+Package: bar
+Binary: bar
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+
+Package: bar
+Binary: bar
+Version: 2.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+

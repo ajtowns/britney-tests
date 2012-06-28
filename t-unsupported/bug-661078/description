@@ -1,0 +1,7 @@
+Built-using can cause newer sources in testing
+
+"""
+build foo against bar 2.  bar 1 is in testing.  put foo in testing.
+"""
+
+(See #661078)

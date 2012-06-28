@@ -1,0 +1,4 @@
+foo 1.0-1+b1 i386
+bar 1.0-1 i386
+foo 1.0-1 source
+bar 1.0-1 source
