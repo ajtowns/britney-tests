@@ -1,0 +1,3 @@
+[submodule "live-data"]
+	path = live-data
+	url = git+ssh://git.debian.org/git/collab-maint/britney-tests-live-data.git

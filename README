@@ -100,9 +100,9 @@ separate Git repository:
 
 If you would like to use them, you may:
 
-	git submodule add git+ssh://git.debian.org/git/collab-maint/britney-tests-live-data.git live-data
+	git submodule update --init
 
-or clone the repository elsewhere.
+to get the live-data/ directory fetched and updated.
 
 Expected input for britney
 --------------------------
