@@ -90,6 +90,20 @@ Note that <archlist> is a comma-separated list of architectures.
 Advanced topics
 ===============
 
+Live-data tests
+---------------
+
+We also have tests based on britney's live-data. They are maintained in a
+separate Git repository:
+
+	git+ssh://git.debian.org/git/collab-maint/britney-tests-live-data.git
+
+If you would like to use them, you may:
+
+	git submodule add git+ssh://git.debian.org/git/collab-maint/britney-tests-live-data.git live-data
+
+or clone the repository elsewhere.
+
 Expected input for britney
 --------------------------
 
