@@ -1,0 +1,20 @@
+Package: real
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Conflicts: pkg
+
+Package: virtual
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Provides: real
+
+Package: pkg
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Depends: real

@@ -1,0 +1,6 @@
+real 1.0-1 i386
+virtual 1.0-1 i386
+pkg 1.0-1 i386
+real 1.0-1 source
+virtual 1.0-1 source
+pkg 1.0-1 source

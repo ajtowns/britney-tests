@@ -1,0 +1,11 @@
+Package: real
+Binary: real
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+
+Package: pkg
+Binary: pkg
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
