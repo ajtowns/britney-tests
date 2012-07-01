@@ -1,0 +1,56 @@
+Package: left-leaf
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Conflicts: right-leaf
+
+Package: right-leaf
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Conflicts: left-leaf
+
+Package: to-be-broken
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Depends: left-1, right-1
+
+Package: to-be-broken-all
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: left-1, right-1
+
+Package: left-1
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: left-2
+
+Package: left-2
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: left-leaf
+
+Package: right-1
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: right-2
+
+Package: right-2
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: right-leaf
+
