@@ -1,0 +1,5 @@
+Check that Britney properly discovers "indirect" breakage
+
+Check for breakage that is not present in direct relations of the
+migrating package.
+

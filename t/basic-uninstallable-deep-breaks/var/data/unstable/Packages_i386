@@ -1,0 +1,69 @@
+Package: migrating
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Conflicts: leaf
+
+Package: leaf
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+
+Package: to-be-broken
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Depends: left-1, right-1 (>= 1.0)
+
+Package: to-be-broken-all
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: left-1, right-1 (>= 1.0)
+
+Package: not-broken
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Depends: left-1, right-1
+
+Package: left-1
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: left-2
+
+Package: left-2
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: migrating
+
+Package: right-1
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: right-2
+
+Package: right-2
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+Depends: leaf
+
+Package: provider
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Provides: right-1
+
