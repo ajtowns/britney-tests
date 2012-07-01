@@ -18,10 +18,13 @@ my $DEFAULT_ARCH = 'i386';
 my @AUTO_CREATE_EMPTY = (
     'var/data/testing/Sources',
     'var/data/testing/Packages_@ARCH@',
+    'var/data/testing/BugsV',
     'var/data/testing-proposed-updates/Sources',
     'var/data/testing-proposed-updates/Packages_@ARCH@',
+    'var/data/testing-proposed-updates/BugsV',
     'var/data/unstable/Sources',
     'var/data/unstable/Packages_@ARCH@',
+    'var/data/unstable/BugsV',
     'hints/test-hints',
 );
 
