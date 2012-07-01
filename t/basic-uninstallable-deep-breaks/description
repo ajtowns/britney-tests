@@ -16,8 +16,3 @@ migrating package.  The case:
  migrating and leaf are co-installable in unstable, but the new
  version of migrating breaks this co-installability and therefore also
  to-be-broken and to-be-broken-all.
-
-
-Now, attempt to remove "provider" - this should break
-to-be-broken{,-all}.
-
