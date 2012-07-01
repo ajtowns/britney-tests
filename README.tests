@@ -25,7 +25,10 @@ There are a number of optional files that may also be useful:
       files have been copied over.
     - Can generate any of the files needed for the test except
       test-data.
-  * <testset>/<tests>/var/data/{testing,}-proposed-updates/{Sources,Packages_$arch}
+  * <testset>/<tests>/var/data/$suite/BugsV
+    - List of RC bugs affecting a given package.
+    - Empty file is created if absent.
+  * <testset>/<tests>/var/data/{testing-,}proposed-updates/{Sources,Packages_$arch}
     - The testing-proposed-updates files will be automatically generated as
       empty files if not present.
     - The proposed-updates files will merely be absent if not created by hand.
