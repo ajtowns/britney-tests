@@ -1,0 +1,8 @@
+some-bin1 2.0-1 i386
+some-bin2 2.0-1 i386
+test-bin1 2.0-1 i386
+test-bin2 2.0-1 i386
+too-young 1.0-1 i386
+some-src 2.0-1 source
+test-src 2.0-1 source
+too-young 1.0-1 source

@@ -1,0 +1,4 @@
+test-src/2.0-1 age=0 emergency
+some-src/2.0-1 age=5 medium
+too-young/2.0-1 age=0 medium
+new-pkg/1.0-1 age=0 emergency

@@ -1,0 +1,24 @@
+Package: test-src
+Binary: test-bin1, test-bin2
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: some-src
+Binary: some-bin1, some-bin2
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: too-young
+Binary: too-yong
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: new-pkg
+Binary: new-pkg
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+

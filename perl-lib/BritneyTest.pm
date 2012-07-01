@@ -11,8 +11,11 @@ use strict;
 use warnings;
 
 use Carp qw(croak);
+use Dpkg::Control;
+
 use Expectation;
 use SystemUtil;
+use TestLib;
 
 my $DEFAULT_ARCH = 'i386';
 my @AUTO_CREATE_EMPTY = (
@@ -44,7 +47,6 @@ sub setup {
     my $rundir = $self->rundir;
     my $testdir = $self->testdir;
     my $outputdir;
-    my $hintlink;
     mkdir $rundir, 0777 or croak "mkdir $rundir: $!";
     system ('rsync', '-a', "$testdir/", "$rundir/") == 0 or
         croak "rsync failed: " . (($?>>8) & 0xff);
@@ -79,9 +81,15 @@ sub setup {
         }
     }
 
-    $hintlink = "$rundir/var/data/unstable/Hints";
-    unless ( -d "$hintlink/" ) {
-        symlink "$rundir/hints", $hintlink or croak "symlink $hintlink -> $rundir/hints: $!";
+    {
+        my $hintlink = "$rundir/var/data/unstable/Hints";
+        my $datatdir = "$rundir/var/data/testing";
+        unless ( -d "$hintlink/" ) {
+            symlink "$rundir/hints", $hintlink or croak "symlink $hintlink -> $rundir/hints: $!";
+        }
+        unless ( -f "$datatdir/Urgency" or -f "$datatdir/Dates" ) {
+            $self->_generate_urgency_dates ($datatdir, "$rundir/var/data/unstable/Sources");
+        }
     }
 
 
@@ -200,6 +208,59 @@ sub _read_test_data {
         }
     }
     close $fd;
+}
+
+sub _generate_urgency_dates {
+    my ($self, $datatdir, $sidsources) = @_;
+    my $urgen = "$datatdir/Test-urgency.in";
+    my $dates = {};
+    my $urgencies = {};
+    my @sources = ();
+    my $ctrl;
+
+    open my $fd, '<', $sidsources or croak "opening $sidsources: $!";
+    while ( defined ($ctrl = Dpkg::Control->new (type => CTRL_INDEX_SRC)) and
+            ($ctrl->parse ($fd, $sidsources)) ) {
+        my $source = $ctrl->{'Package'};
+        my $version = $ctrl->{'Version'};
+        croak "$sidsources contains a bad entry!"
+            unless defined $source and defined $version;
+        push @sources, [$source, $version];
+        $urgencies->{"$source/$version"} = 'low';
+        $dates->{"$source/$version"} = 1;
+    }
+    close $fd;
+
+    if ( -f $urgen ) {
+        # Load the urgency generation hints.
+        # Britney's day begins at 3pm.
+        my $bnow = int (((time / (60 * 60)) - 15) / 24);
+        open $fd, '<', $urgen or croak "opening $urgen: $!";
+        while ( my $line = <$fd> ) {
+            chomp $line;
+            next if $line =~ m/^\s*(?:\#|\z)/o;
+            my ($srcver, $date, $urgency) = split m/\s++/, $line, 3;
+            croak "Cannot parse line $. in $urgen."
+                unless defined $srcver and defined $date and
+                       defined $urgency;
+            croak "Reference to unknown source $srcver ($urgen: $.)"
+                unless exists $urgencies->{$srcver};
+            croak "Unknown urgency for $srcver ($urgen: $.)"
+                unless $urgency =~ m/^(low|medium|high|emergency|critical)$/;
+            if ($date eq '*') {
+                $date = 1;
+            } elsif ($date =~ m/^age=(\d+)$/o) {
+                $date = $bnow - $1;
+            } elsif ($date !~ m/^\d+$/o) {
+                croak "Date for $srcver is not an int ($urgen: $.)";
+            }
+            $urgencies->{$srcver} = $urgency;
+            $dates->{$srcver} = $date;
+        }
+        close $fd;
+    }
+
+    TestLib::gen_dates_urgencies ($datatdir, \@sources, $dates, $urgencies);
 }
 
 sub _gen_britney_conf {

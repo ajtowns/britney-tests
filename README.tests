@@ -6,8 +6,6 @@ A minimal test case consists of the following files:
  * <testset>/<test>/var/data/{unstable,testing}/{Sources,Packages_$arch}
    - Absent files will be created as empty files
    - $arch defaults to i386 (configurable in the test-data file)
- * <testset>/<test>/var/data/testing/{Urgency,Dates}
-   - Files containing urgency and upload dates for packages.
  * <testset>/<test>/hints/test-hints
    - Hint file for the test.
    - If absent, it will be created as an empty file.
@@ -28,6 +26,10 @@ There are a number of optional files that may also be useful:
   * <testset>/<tests>/var/data/$suite/BugsV
     - List of RC bugs affecting a given package.
     - Empty file is created if absent.
+  * <testset>/<test>/var/data/testing/{Urgency,Dates}
+    - Files containing urgency and upload dates for packages.
+    - Will be auto-generated if absent.  Also see the "Test-urgency.in"
+      file below.
   * <testset>/<tests>/var/data/{testing-,}proposed-updates/{Sources,Packages_$arch}
     - The testing-proposed-updates files will be automatically generated as
       empty files if not present.
@@ -81,6 +83,41 @@ The following fields are available:
    - space separated list of "BREAK_ARCHES" architectures enabled in this test.
    - Used to generate the britney.conf file
    - defaults to: <empty>
+
+The "Test-urgency.in" file
+--------------------------
+
+If a test does not provide an "Urgency" or a "Dates" file, the test
+runner will auto-generate them using "urgency low" and "uploaded in
+1970 Jan" as date for all packages in sid.  The "Test-urgency.in" file
+can be used to override these values on a per package level.
+
+It consists of 0 or more lines in the following format:
+
+ <source>/<version> <date-spec> <urgency>
+
+<source> is the name of the source package and <version> is the
+version of the package to be affected.  <urgency> must be a valid
+urgency (i.e. one of low, medium, high, critical or emergency).
+<date-spec> can be either an * or age=<days>, where <days> is a
+positive.
+
+If <date-spec> is *, then the default date is used.  Otherwise, <days>
+describes how "old" the package (i.e. how many days ago it was
+"uploaded").
+
+The <source>/<version> pair must appear in the Sources file for
+unstable.
+
+Caveat: The test runner has to generate an absolute date.  This
+creates a race condition between the generation of the Dates file and
+Britney is started.
+  Therefore, always ensure the test works even if the age is one
+higher than written in the test.  (E.g. use age=3 rather than age=4
+with urgency medium).  Otherwise the test may happen to fail if run
+too close to the start of (Britney's) day.
+
+This file should be stored as "<testset>/<test>/var/data/testing/Test-urgency.in".
 
 The "post-setup" hook
 ---------------------
