@@ -50,11 +50,7 @@ sub setup {
         croak "rsync failed: " . (($?>>8) & 0xff);
     $outputdir = "$rundir/var/data/output";
     unless (-d $outputdir ) {
-        mkdir $outputdir, 0777 or croak "mkdir $outputdir: $!";
-    }
-    $hintlink = "$rundir/var/data/unstable/Hints";
-    unless ( -d "$hintlink/" ) {
-        symlink "$rundir/hints", $hintlink or croak "symlink $hintlink -> $rundir/hints: $!";
+        system ('mkdir', '-p', $outputdir) == 0 or croak "mkdir -p $outputdir failed";
     }
 
     $self->_read_test_data;
@@ -82,6 +78,13 @@ sub setup {
             close $fd or croak "close $f: $!";
         }
     }
+
+    $hintlink = "$rundir/var/data/unstable/Hints";
+    unless ( -d "$hintlink/" ) {
+        symlink "$rundir/hints", $hintlink or croak "symlink $hintlink -> $rundir/hints: $!";
+    }
+
+
     $self->_gen_britney_conf ("$rundir/britney.conf", $self->{'testdata'},
                               "$rundir/var/data", "$outputdir");
 
