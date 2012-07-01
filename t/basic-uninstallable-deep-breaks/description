@@ -1,5 +1,23 @@
 Check that Britney properly discovers "indirect" breakage
 
 Check for breakage that is not present in direct relations of the
-migrating package.
+migrating package.  The case:
+
+ right-1 depends on right-2 and right-2 depends on leaf.
+ left-1 depends on left-2 and left-2 depends on migrating.
+ provider provides right-1.
+
+ to-be-broken and to-be-broken-all depends left-1 and right-1
+ (versioned, so provider cannot supply it).
+
+ not-broken depends on left-1 and right-1 (unversioned, so provider
+ can supply it).
+
+ migrating and leaf are co-installable in unstable, but the new
+ version of migrating breaks this co-installability and therefore also
+ to-be-broken and to-be-broken-all.
+
+
+Now, attempt to remove "provider" - this should break
+to-be-broken{,-all}.
 

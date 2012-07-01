@@ -10,6 +10,9 @@ migrating package.  The case:
  to-be-broken and to-be-broken-all depends left-1 and right-1
  (unversioned, so provider can provide it).
 
+ right-leaf and left-leaf are not co-installable.  Without provider,
+ to-be-broken and to-be-broken-all will not be installable
+
 
 Now, attempt to remove "provider" - this should break
 to-be-broken{,-all}.
