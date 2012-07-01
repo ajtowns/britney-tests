@@ -1,0 +1,14 @@
+exim4 2.0-1 i386
+postfix 2.0-1 i386
+nullmailer 1.0-1 i386
+dep-mta 1.0-1 i386
+dep-postfix 1.0-1 i386
+dep-exim4 1.0-1 i386
+dep-indirect-possible 1.0-1 i386
+exim4 2.0-1 source
+postfix 2.0-1 source
+nullmailer 1.0-1 source
+dep-mta 1.0-1 source
+dep-postfix 1.0-1 source
+dep-exim4 1.0-1 source
+dep-indirect-possible 1.0-1 source

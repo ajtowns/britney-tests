@@ -1,0 +1,48 @@
+Package: postfix
+Binary: postfix
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: exim4
+Binary: exim4
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: nullmailer
+Binary: nullmailer
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: dep-mta
+Binary: dep-mta
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: dep-postfix
+Binary: dep-postfix
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: dep-exim4
+Binary: dep-exim4
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: dep-indirect-possible
+Binary: dep-indirect-possible
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: dep-indirect-broken
+Binary: dep-indirect-broken
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+

@@ -1,0 +1,12 @@
+Package: exim4
+Binary: exim4
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: postfix
+Binary: postfix
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+

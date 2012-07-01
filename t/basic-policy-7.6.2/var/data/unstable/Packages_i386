@@ -1,0 +1,65 @@
+Package: exim4
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Conflicts: mail-transport-agent
+Replaces: mail-transport-agent
+Provides: mail-transport-agent
+Architecture: i386
+Section: devel
+
+Package: postfix
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Conflicts: mail-transport-agent
+Replaces: mail-transport-agent
+Provides: mail-transport-agent
+Architecture: i386
+Section: devel
+
+Package: nullmailer
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Conflicts: mail-transport-agent
+Replaces: mail-transport-agent
+Provides: mail-transport-agent
+Architecture: i386
+Section: devel
+
+Package: dep-mta
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: mail-transport-agent
+Architecture: i386
+Section: devel
+
+Package: dep-postfix
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: postfix (>= 2)
+Architecture: i386
+Section: devel
+
+Package: dep-exim4
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: exim4 (>= 2)
+Architecture: i386
+Section: devel
+
+Package: dep-indirect-possible
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: dep-postfix, dep-mta
+Architecture: i386
+Section: devel
+
+Package: dep-indirect-broken
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: dep-postfix, dep-exim4
+Architecture: i386
+Section: devel
+
+
+
+

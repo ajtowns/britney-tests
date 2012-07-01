@@ -1,0 +1,18 @@
+Package: exim4
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Conflicts: mail-transport-agent
+Replaces: mail-transport-agent
+Provides: mail-transport-agent
+Architecture: i386
+Section: devel
+
+Package: postfix
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Conflicts: mail-transport-agent
+Replaces: mail-transport-agent
+Provides: mail-transport-agent
+Architecture: i386
+Section: devel
+

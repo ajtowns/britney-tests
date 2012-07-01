@@ -1,0 +1,8 @@
+exim4 2.0-1 low
+postfix 2.0-1 low
+nullmailer 1.0-1 low
+dep-mta 1.0-1 low
+dep-postfix 1.0-1 low
+dep-exim4 1.0-1 low
+dep-indirect-possible 1.0-1 low
+dep-indirect-broken 1.0-1 low
