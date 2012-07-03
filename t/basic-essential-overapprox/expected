@@ -1,0 +1,9 @@
+gawk 1.0-1 i386
+mawk 1.0-1 i386
+some-bin1 1.0-1 i386
+some-bin2 1.0-1 i386
+test 1.0-1 i386
+libtest1 1.0-1 i386
+awks 1.0-1 source
+some-src 1.0-1 source
+test-src 1.0-1 source

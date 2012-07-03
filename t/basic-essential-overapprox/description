@@ -1,0 +1,8 @@
+Test case against overapproximating pseudo-essential set
+
+In this case both some-bin1 and some-bin2 are installable in testing.
+However, if the Britney implementation overapproximates the pseudo
+essential set and includes both mawk and gawk then they are not
+installable.
+
+

@@ -1,0 +1,11 @@
+Package: test-src
+Binary: test, libtest1
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+
+Package: awks
+Binary: gawk, mawk
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
