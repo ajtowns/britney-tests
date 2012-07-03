@@ -1,0 +1,7 @@
+Test case with conflict against pseudo-essential set
+
+In this case "broken" is broken because it has conflicts with the
+pseudo essenstial set.  This is an generalization of
+basic-essential-pseudo.
+
+

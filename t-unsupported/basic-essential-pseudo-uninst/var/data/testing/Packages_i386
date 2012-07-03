@@ -1,0 +1,32 @@
+Package: test
+Section: devel
+Architecture: i386
+Source: test-src
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Depends: libtest1, awk
+Essential: yes
+
+Package: libtest1
+Section: devel
+Architecture: i386
+Source: test-src
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+
+Package: gawk
+Section: devel
+Architecture: i386
+Source: awks
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Provides: awk
+
+Package: mawk
+Section: devel
+Architecture: i386
+Source: awks
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Provides: awk
+
