@@ -1,0 +1,6 @@
+Simple case with pseudo-essential packages
+
+When essential packages have strong depends, other packages must
+(also) be co-installable with the strong dependencies of the essential
+packages.  This is a generalization of basic-essential.
+

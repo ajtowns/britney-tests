@@ -1,0 +1,32 @@
+Package: test
+Source: test-src
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: libtest1
+Architecture: i386
+Section: devel
+Essential: yes
+
+Package: libtest1
+Source: test-src
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+
+Package: some-bin1
+Source: some-src
+Version: 1.0-1
+Depends: some-bin2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+
+Package: some-bin2
+Source: some-src
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Breaks: libtest1 (<< 1.1)
+

@@ -1,0 +1,16 @@
+Package: test
+Section: devel
+Architecture: i386
+Source: test-src
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+Depends: libtest1
+Essential: yes
+
+Package: libtest1
+Section: devel
+Architecture: i386
+Source: test-src
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+
