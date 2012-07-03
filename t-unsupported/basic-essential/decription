@@ -1,0 +1,4 @@
+Simple case with essential packages
+
+Packages that are not co-installable with the essential packages are
+not installable in general.
