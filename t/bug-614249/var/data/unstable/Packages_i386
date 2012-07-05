@@ -1,27 +1,31 @@
-Package: p
+Package: p-bin
+Source: p-src
 Section: devel
 Architecture: i386
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Version: 1.0-1
-Depends: n | o1, n | o2
+Depends: n-bin | o1-bin, n-bin | o2-bin
 
-Package: n
+Package: n-bin
+Source: n-src
 Section: devel
 Architecture: i386
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Version: 1.0-1
-Conflicts: o1, o2
+Conflicts: o1-bin, o2-bin
 
-Package: o1
+Package: o1-bin
+Source: o1-src
 Section: devel
 Architecture: i386
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Version: 1.0-1
 
-Package: q
+Package: q-bin
+Source: q-src
 Section: devel
 Architecture: i386
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Version: 1.0-1
-Depends: p, o1
+Depends: p-bin, o1-bin
 

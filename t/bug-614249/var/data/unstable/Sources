@@ -1,23 +1,23 @@
-Package: p
-Binary: p
+Package: p-src
+Binary: p-bin
 Version: 1.0-1
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
 
-Package: n
-Binary: n
+Package: n-src
+Binary: n-bin
 Version: 1.0-1
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
 
-Package: o1
-Binary: o1
+Package: o1-src
+Binary: o1-bin
 Version: 1.0-1
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
 
-Package: q
-Binary: q
+Package: q-src
+Binary: q-bin
 Version: 1.0-1
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
