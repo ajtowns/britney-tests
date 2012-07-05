@@ -1,7 +1,7 @@
-Package: p
+Package: pp
 Section: devel
 Architecture: i386
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Version: 1.0-1
-Depends: r, missing
+Depends: rr, missing
 

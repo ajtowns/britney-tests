@@ -3,6 +3,6 @@ Case where Britney is allowed to break packages by removal
 Britney is allowed to remove a source package as long as the overall
 installability is as good as it was before.
 
-In this test, Britney can remove r, because p is already broken so the
+In this test, Britney can remove rr, because pp is already broken so the
 installability is the same as before.
 
