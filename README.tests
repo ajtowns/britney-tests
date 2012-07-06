@@ -83,6 +83,9 @@ The following fields are available:
    - space separated list of "BREAK_ARCHES" architectures enabled in this test.
    - Used to generate the britney.conf file
    - defaults to: <empty>
+ * Expected-Failure
+   - space separated list of implementations known to fail the test.  Known
+     implementations are "britney2" and "sat-britney".
 
 The "Test-urgency.in" file
 --------------------------
