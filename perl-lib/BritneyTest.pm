@@ -197,17 +197,16 @@ sub _read_test_data {
     my ($self) = @_;
     my $rundir = $self->rundir;
     my $dataf = "$rundir/test-data";
+    my $ctrl;
+    my @para;
     return unless -s $dataf;
     open my $fd, '<', $dataf or croak "opening $dataf: $!";
-    while (my $line = <$fd> ) {
-        chomp ($line);
-        if ($line =~ m/^([^ \t:]+):\s*(\S(?:.*\S)?)\s*$/o) {
-            my ($opt,$value) = (lc $1, $2);
-            $self->{'testdata'}->{$opt} = $value
-                unless exists $self->{'testdata'}->{$opt};
-        }
+    while ( defined ($ctrl = Dpkg::Control->new (type => CTRL_UNKNOWN)) and
+            ($ctrl->parse ($fd, $dataf)) ) {
+        push @para, $ctrl;
     }
     close $fd;
+    $self->{'testdata'} = shift @para;
 }
 
 sub _generate_urgency_dates {
