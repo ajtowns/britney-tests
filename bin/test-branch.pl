@@ -47,10 +47,12 @@ die "Missing test-branch argument.\n" unless $opt{'test-branch'};
 die "Cannot pit a branch against itself.\n" if $opt{'test-branch'} eq $opt{'orig-branch'};
 
 my $create_test = sub { return BritneyTest->new (@_); };
+my $impl = 'britney2';
 
 if ($opt{'sat-britney'}) {
     require BritneyTest::SAT;
     $create_test = sub { return BritneyTest::SAT->new (@_); };
+    $impl = 'sat-britney';
     print "N: Using SAT-britney calling convention\n";
 } else {
     print "N: Setting PYTHONDONTWRITEBYTECODE=1\n";
@@ -60,10 +62,23 @@ if ($opt{'sat-britney'}) {
 my ($britney, $TESTSET, $RUNDIR) = @ARGV;
 
 my @tests;
-my %failed = ();
 my $diffs = 0;
 my %it = ();
 my %accrt = ();
+my $errors = 0;
+my %failed = (
+    'test' => 0,
+    'orig' => 0,
+);
+my %expected = (
+    'test' => 0,
+    'orig' => 0,
+);
+my %unexpected = (
+    'test' => 0,
+    'orig' => 0,
+);
+
 die "Usage: $prog <britney> <testset> <rundir>\n"
     unless $britney && $TESTSET && $RUNDIR;
 die "Testset \"$TESTSET\" does not exists\n"
@@ -108,16 +123,32 @@ foreach my $t (@tests) {
         $ignore_expected = ($bt->testdata ('ignore-expected')//'no') eq 'yes';
         my $t = $ts->();
         my $rt;
-        my ($suc, $iter) = $bt->run ($britney);
-        if ($ignore_expected) {
+        my ($suc, $iter) = $bt->run ($britney, $impl);
+        if ($@) {
+            print "ERROR: $@";
+            exit 2 if not $opt{'keep-going'};
+            $errors++;
+            next;
+        } elsif ($ignore_expected) {
             $res = ' done';
             $checkdiff = 1;
-        } elsif ($suc) {
+        } elsif ($suc == SUCCESS_EXPECTED or $suc == FAILURE_EXPECTED) {
             $res = ' ok';
+            if ($suc == FAILURE_EXPECTED) {
+                $res = ' expected failure';
+                $fail{$reviewed}++;
+                $failed{$reviewed}++;
+                $expected{$reviewed}++;
+            }
         } else {
             $res = ' FAILED';
-            $fail{$reviewed}++;
-            $failed{$reviewed}++;
+            if ($suc == SUCCESS_UNEXPECTED) {
+                $res = ' UNEXPECTED SUCCESS';
+                $unexpected{$reviewed}++;
+            } else {
+                $fail{$reviewed}++;
+                $failed{$reviewed}++;
+            }
         }
         $rt = $tf->($t);
         $accrt{$reviewed} += $rt;
@@ -129,7 +160,7 @@ foreach my $t (@tests) {
         printf ('%s (%.3fs)', $res, $rt);
     }
 
-    if ($checkdiff || $fail{'orig'} && $fail{'test'}) {
+    if ($checkdiff || ($fail{'orig'} && $fail{'test'})) {
         # they both failed, but did they produce the same result?
         my $ores = Expectation->new ();
         my $tres = Expectation->new ();
@@ -153,11 +184,24 @@ foreach my $t (@tests) {
 
 print "\nSummary:\n";
 print 'Ran ' . scalar (@tests) . " tests\n";
+print "$opt{'orig-branch'} had unexpected successes: $unexpected{'orig'}\n" if $unexpected{'orig'};
 print "$opt{'orig-branch'} failed $failed{'orig'} tests\n" if $failed{'orig'};
+print " - of which $expected{'orig'} where expected\n" if $expected{'orig'};
+print "$opt{'test-branch'} had unexpected successes: $unexpected{'test'}\n" if $unexpected{'test'};
 print "$opt{'test-branch'} failed $failed{'test'} tests\n" if $failed{'test'};
+print " - of which $expected{'test'} where expected\n" if $expected{'test'};
 print "There were $diffs test(s) where the two branches both failed and produced different results\n"
     if $diffs;
-exit (($failed{'test'} || $diffs) ? 1 : 0);
+print "There were $errors tests with errors\n" if $errors;
+
+# Exit 2 if there were errors
+exit 2 if $errors;
+# Exit 1 if there were diffs, unexpected results or more failures than expected.
+exit 1 if $diffs or $unexpected{'orig'} or $unexpected{'test'};
+exit 1 if $failed{'orig'} > $expected{'orig'};
+exit 1 if $failed{'test'} > $expected{'test'};
+# else everything is fine.
+exit 0;
 
 ### functions ###
 

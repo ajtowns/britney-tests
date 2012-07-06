@@ -39,10 +39,12 @@ Getopt::Long::config ('bundling', 'no_getopt_compat', 'no_auto_abbrev');
 GetOptions (%opthash) or die "error parsing options, run with --help for more info\n";
 
 my $create_test = sub { return BritneyTest->new (@_); };
+my $impl = 'britney2';
 
 if ($opt{'sat-britney'}) {
     require BritneyTest::SAT;
     $create_test = sub { return BritneyTest::SAT->new (@_); };
+    $impl = 'sat-britney';
     print "N: Using SAT-britney calling convention\n";
 }
 
@@ -52,6 +54,8 @@ my ($britney, $TESTSET, $RUNDIR) = @ARGV;
 
 my @tests;
 my $failed = 0;
+my $expected = 0;
+my $unexpected = 0;
 my $errors = 0;
 
 die "Usage: $prog <britney> <testset> <rundir>\n"
@@ -72,19 +76,32 @@ foreach my $t (@tests) {
     my $res;
     print "Running $t...";
     $bt->setup;
+    my $ignore_expected = ($bt->testdata ('ignore-expected')//'no') eq 'yes';
     my $t = $ts->();
     my ($suc, $iter);
-    eval { ($suc, $iter) = $bt->run ($britney); };
+    eval { ($suc, $iter) = $bt->run ($britney, $impl); };
     if ($@) {
         print "ERROR: $@";
         exit 2 if not $opt{'keep-going'};
         $errors++;
         next;
-    } elsif ($suc) {
-        $res = " done";
+    } elsif ($ignore_expected) {
+        $res = ' done';
+    } elsif ($suc == SUCCESS_EXPECTED or $suc == FAILURE_EXPECTED) {
+        $res = ' ok';
+        if ($suc == FAILURE_EXPECTED) {
+            $res = ' expected failure';
+            $failed++;
+            $expected++;
+        }
     } else {
-        $res = " FAILED";
-        $failed++;
+        $res = ' FAILED';
+        if ($suc == SUCCESS_UNEXPECTED) {
+            $res = ' UNEXPECTED SUCCESS';
+            $unexpected++;
+        } else {
+            $failed++;
+        }
     }
     # Calculate the number of iterations used to find the result
     #  (it takes at least one iteration to reach a fixed-point).
@@ -95,9 +112,13 @@ foreach my $t (@tests) {
 
 print "\nSummary:\n";
 print 'Ran ' . scalar (@tests) . " tests\n";
+print "Unexpected successes: $unexpected\n" if $unexpected;
 print "Failed tests: $failed\n";
+print " - of which $expected were expected\n" if $expected;
 print "Errors: $errors\n" if $errors;
-exit ($failed + $errors ? 1 : 0);
+
+exit 1 if $errors or $failed > $expected or $unexpected;
+exit 0;
 
 ### functions ###
 

@@ -5,10 +5,18 @@
 
 package BritneyTest;
 
-use base qw(Class::Accessor);
-
 use strict;
 use warnings;
+
+use base qw(Exporter Class::Accessor);
+
+use constant {
+    SUCCESS_EXPECTED => 0,
+    FAILURE_UNEXPECTED => 1,
+    SUCCESS_UNEXPECTED => 2,
+    FAILURE_EXPECTED => 3,
+    FAILURE_ERROR => 4,
+};
 
 use Carp qw(croak);
 use Dpkg::Control;
@@ -16,6 +24,14 @@ use Dpkg::Control;
 use Expectation;
 use SystemUtil;
 use TestLib;
+
+our @EXPORT = qw(
+      SUCCESS_EXPECTED
+      FAILURE_UNEXPECTED
+      SUCCESS_UNEXPECTED
+      FAILURE_EXPECTED
+      FAILURE_ERROR
+);
 
 my $DEFAULT_ARCH = 'i386';
 my @AUTO_CREATE_EMPTY = (
@@ -100,7 +116,7 @@ sub setup {
 }
 
 sub run {
-    my ($self, $britney) = @_;
+    my ($self, $britney, $impl) = @_;
     my $cmd = $self->_britney_cmdline ($britney);
     my $rundir = $self->rundir;
     my $testdata = $self->{'testdata'};
@@ -136,9 +152,9 @@ sub run {
             if (@$as + @$rs + @$ab + @$rb) {
                 # Failed
                 Expectation::print_diff ($fd, $as, $rs, $ab, $rb);
-                $result = 0;
+                $result = FAILURE_UNEXPECTED;
             } else {
-                $result = 1;
+                $result = SUCCESS_EXPECTED;
             }
         }
 
@@ -159,6 +175,11 @@ sub run {
             # If we are not looking for a fixed-point then stop here.
             last;
         }
+    }
+    if ($impl and exists $self->{'failures'}->{lc $impl}) {
+        # The implementation is expected to fail
+        $result = SUCCESS_UNEXPECTED if $result == SUCCESS_EXPECTED;
+        $result = FAILURE_EXPECTED if $result == FAILURE_UNEXPECTED;
     }
     return wantarray ? ($result, $i) : $result;
 }
@@ -207,6 +228,11 @@ sub _read_test_data {
     }
     close $fd;
     $self->{'testdata'} = shift @para;
+    if ($self->{'testdata'}->{'expected-failure'}) {
+        my $rawfield = $self->{'testdata'}->{'expected-failure'};
+        my %impl = map { $_ => 1 } grep { $_ } split m/(\s++|\n)++/o, $rawfield;
+        $self->{'failures'} = \%impl;
+    }
 }
 
 sub _generate_urgency_dates {

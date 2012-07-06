@@ -31,10 +31,12 @@ GetOptions (%opthash) or die "error parsing options, run with --help for more in
 
 my ($britney, $TESTSET, $RUNDIR, $test) = @ARGV;
 my $create_test = sub { return BritneyTest->new (@_); };
+my $impl = 'britney2';
 
 if ($opt{'sat-britney'}) {
     require BritneyTest::SAT;
     $create_test = sub { return BritneyTest::SAT->new (@_); };
+    $impl = 'sat-britney';
     print "N: Using SAT-britney calling convention\n";
 }
 
@@ -53,11 +55,23 @@ unless ( -d $RUNDIR ) {
 my $o = {'fixed-point' => $opt{'fixed-point'} };
 my $bt = $create_test->($o, "$RUNDIR/$test", "$TESTSET/$test");
 $bt->setup;
-my ($res, $iter) = $bt->run ($britney);
-
+my $ignore_expected = ($bt->testdata ('ignore-expected')//'no') eq 'yes';
+my ($suc, $iter);
+my $exitcode = 0;
+eval { ($suc, $iter) = $bt->run ($britney, $impl); };
+if ($@) {
+    print "ERROR: $@";
+    exit 2;
+} elsif ($ignore_expected or $suc == SUCCESS_EXPECTED or $suc == FAILURE_EXPECTED) {
+    print "Failed (but expected)\n" if $suc == FAILURE_EXPECTED;
+} else {
+    $exitcode = 1;
+    print "UNEXPECTED SUCCESS\n" if $suc == SUCCESS_UNEXPECTED;
+    print "FAILED\n" if $suc == FAILURE_UNEXPECTED;
+}
 print "$iter iterations\n" if $iter > 1;
 
-exit ($res ? 0 : 1);
+exit $exitcode;
 
 ### functions ###
 
