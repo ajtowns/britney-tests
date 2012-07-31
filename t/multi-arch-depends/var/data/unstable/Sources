@@ -1,4 +1,4 @@
-Package: libtest
+Package: test
 Binary: test
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>

@@ -10,7 +10,7 @@ Version: 1.0-2
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
 
-Package: test-src-a
+Package: test-src-b
 Binary: test-binb
 Version: 1.0-2
 Section: devel
