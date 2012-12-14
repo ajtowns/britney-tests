@@ -1,0 +1,14 @@
+Check that Britney can remove obsolete source packages
+
+An obsolete source package is defined as a source package that no
+longer has any binaries in testing.  Usually caused by another source
+producing the binary packages with the same name (but higher version)
+as the obsolete source.
+
+This case distinguishes itself from the regular source removal in the
+case where the "obsolete" source is still in testing.  In this case,
+"obsolete" source will still be removed from testing.
+
+Optimally, Britney should be able to remove some-src/1.0-1 in one
+iteration.  However, the current implementation requires a second
+iteration.
