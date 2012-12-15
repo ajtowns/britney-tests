@@ -8,7 +8,3 @@ as the obsolete source.
 This case distinguishes itself from the regular source removal in the
 case where the "obsolete" source is still in testing.  In this case,
 "obsolete" source will still be removed from testing.
-
-Optimally, Britney should be able to remove some-src/1.0-1 in one
-iteration.  However, the current implementation requires a second
-iteration.
