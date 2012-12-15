@@ -101,7 +101,7 @@ sub setup {
         my $hintlink = "$rundir/var/data/unstable/Hints";
         my $datatdir = "$rundir/var/data/testing";
         unless ( -d "$hintlink/" ) {
-            symlink "$rundir/hints", $hintlink or croak "symlink $hintlink -> $rundir/hints: $!";
+            symlink "../../../hints", $hintlink or croak "symlink $hintlink -> $rundir/hints: $!";
         }
         unless ( -f "$datatdir/Urgency" or -f "$datatdir/Dates" ) {
             $self->_generate_urgency_dates ($datatdir, "$rundir/var/data/unstable/Sources");
