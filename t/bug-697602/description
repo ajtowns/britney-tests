@@ -1,0 +1,11 @@
+Check that britney properly handles "X builts Y" and "Y builts X" case
+
+Check that when a package Y is RC buggy, it does not affect the source
+package unless said source package builts Y.
+
+Currently, there is no "source" (or "binary") marker in the BugsV
+files.  This makes it impossible to distinguish whether a given RC bug
+affects the source packages X and or the binary X.  Britney currently
+thinks this means that the bug applies to both packages.
+
+Related Britney bug: #697602

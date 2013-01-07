@@ -1,0 +1,12 @@
+Package: right
+Binary: left
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: left
+Binary: right
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
