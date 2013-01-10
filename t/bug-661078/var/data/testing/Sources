@@ -15,4 +15,4 @@ Binary: bar
 Version: 2.0-1
 Section: devel
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Only-Extra-Source: yes
+Extra-Source-Only: yes
