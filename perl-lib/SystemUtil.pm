@@ -12,8 +12,6 @@ use base 'Exporter';
 
 use constant MIN_OOM_ADJ => 0;
 
-use Fcntl qw(SEEK_SET);
-
 our @EXPORT = (qw(system_file));
 
 sub system_file {
