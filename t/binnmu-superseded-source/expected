@@ -1,0 +1,5 @@
+test-bin1 1.0-1 i386
+test-bin2 1.0-1 i386
+test-bin1 1.0-1 amd64
+test-bin2 1.0-1 amd64
+test-src 1.0-1 source

@@ -1,0 +1,23 @@
+Test to ensure that binNMUs from superseded sources are not considered
+
+Given a source which provides two packages and different versions in
+testing and unstable, binNMUs in unstable corresponding to the older
+source version should not be considered as migration candidates.
+
+For example:
+
+testing
+-------
+
+source 1
+bin 1 arch1
+bin 1 arch2
+
+unstable
+--------
+
+source 2
+bin 2 arch1
+bin 1+b1 arch2
+
+The binary migration on arch2 should not be considered a candidate.
