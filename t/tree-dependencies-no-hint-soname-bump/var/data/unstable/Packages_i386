@@ -5,7 +5,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: libroot2 (>= 2.0)
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: leafb
 Source: leafb (1.0-1)
@@ -14,7 +13,6 @@ Depends: libroot2 (>= 2.0)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: libroot2
 Source: libroot
@@ -22,4 +20,3 @@ Version: 2.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: libs
-Description: la-dee-daa

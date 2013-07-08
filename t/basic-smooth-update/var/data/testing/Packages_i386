@@ -4,7 +4,6 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: libs
-Description: la-dee-daa
 
 Package: binnmu-pkg
 Source: binnmu-pkg
@@ -13,7 +12,6 @@ Depends: libtest1 (>= 1.0)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: ood-pkg
 Source: ood-pkg
@@ -22,5 +20,4 @@ Depends: libtest1 (>= 1.0)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 

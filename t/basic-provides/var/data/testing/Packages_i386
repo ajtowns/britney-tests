@@ -5,7 +5,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Provides: old-name
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: depender
 Source: src2
@@ -14,4 +13,3 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: old-name
 Architecture: i386
 Section: devel
-Description: la-dee-daa

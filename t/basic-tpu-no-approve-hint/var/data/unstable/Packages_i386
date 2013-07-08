@@ -5,7 +5,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: test-bin2
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-bin2
 Source: test-src
@@ -13,7 +12,6 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: some-bin1
 Source: some-src
@@ -22,7 +20,6 @@ Depends: some-bin2
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: some-bin2
 Source: some-src
@@ -31,5 +28,4 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: test-bin1
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 

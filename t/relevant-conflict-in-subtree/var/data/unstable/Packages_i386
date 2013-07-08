@@ -5,7 +5,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: test-binp, test-binw
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-binp
 Source: test-src
@@ -14,7 +13,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: test-bina | test-binb , test-bina2 | test-binb2
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-binw
 Source: test-src
@@ -23,7 +21,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Conflicts: test-bind, test-bind2
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-bina
 Source: test-src
@@ -32,7 +29,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: test-binc, test-bind
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-binb
 Source: test-src
@@ -41,7 +37,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Conflicts: test-binb2
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-binc
 Source: test-src
@@ -50,7 +45,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Conflicts: test-binc2
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-bind
 Source: test-src
@@ -58,7 +52,6 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-bina2
 Source: test-src
@@ -67,7 +60,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: test-binc2, test-bind2
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-binb2
 Source: test-src
@@ -75,7 +67,6 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-binc2
 Source: test-src
@@ -83,7 +74,6 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: test-bind2
 Source: test-src
@@ -91,4 +81,3 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa

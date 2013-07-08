@@ -5,7 +5,6 @@ Depends: some-bin2
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: some-bin2
 Source: some-src
@@ -14,5 +13,4 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: test-bin1
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 

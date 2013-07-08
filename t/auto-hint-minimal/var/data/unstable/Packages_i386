@@ -5,7 +5,6 @@ Breaks: bin-b (<< 1.1)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: bin-b
 Source: b
@@ -14,7 +13,6 @@ Depends: bin-a (>= 1.1)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: bin-c
 Source: c
@@ -23,7 +21,6 @@ Depends: bin-b (>= 1.1)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: bin-z
 Source: z
@@ -32,5 +29,4 @@ Depends: bin-c
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 

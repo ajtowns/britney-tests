@@ -5,7 +5,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: pkg-left (= 1.0-1), pkg-right (= 1.0-1)
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: pkg-left
 Source: pkg-left
@@ -14,7 +13,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: root (= 1.0-1)
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: pkg-right
 Source: pkg-right
@@ -23,7 +21,6 @@ Depends: root (= 1.0-1)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: root
 Source: root
@@ -31,7 +28,6 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: some-package
 Source: some-package
@@ -39,5 +35,4 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 

@@ -77,7 +77,6 @@ Maintainer: The R-Team <debian-release\@lists.debian.org>
 Depends: $dep
 Architecture: i386
 Section: devel
-Description: nantoka nantoka
 
 EOF
             print $srcs <<EOF ;
@@ -109,7 +108,6 @@ Maintainer: The R-Team <debian-release\@lists.debian.org>
 Depends: $dep
 Architecture: i386
 Section: devel
-Description: nantoka nantoka
 
 EOF
             print $srcs <<EOF ;

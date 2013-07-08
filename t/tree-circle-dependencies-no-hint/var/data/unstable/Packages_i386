@@ -5,7 +5,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: root (= 1.0-2), leaf-a2 (= 1.0-2)
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: leaf-a2
 Source: leaf-a2
@@ -14,7 +13,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: root (= 1.0-2), leaf-a1 (= 1.0-2)
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: leaf-b
 Source: leaf-b
@@ -23,7 +21,6 @@ Depends: root (= 1.0-2)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa
 
 Package: root
 Source: root
@@ -31,4 +28,3 @@ Version: 1.0-2
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
-Description: la-dee-daa

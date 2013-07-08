@@ -5,7 +5,6 @@ Maintainer: The R-Team <debian-release@lists.debian.org>
 Depends: some-bin1 (>= 1.0-1)
 Architecture: amd64
 Section: devel
-Description: la-dee-daa
 
 Package: some-bin1
 Source: some-src
@@ -13,4 +12,3 @@ Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: all
 Section: devel
-Description: la-dee-daa
