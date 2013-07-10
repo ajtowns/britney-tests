@@ -1,0 +1,6 @@
+Package: pkg
+Source: src
+Section: devel
+Architecture: amd64
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1

@@ -1,0 +1,4 @@
+Simple test that Britney throws out binaries
+
+Simple test case where a binary is removed from one architecture in
+sid, Britney is expected to remove that binary on that architecture.
