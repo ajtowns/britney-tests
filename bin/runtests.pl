@@ -87,10 +87,15 @@ foreach my $t (@tests) {
         next;
     } elsif ($ignore_expected) {
         $res = ' done';
-    } elsif ($suc == SUCCESS_EXPECTED or $suc == FAILURE_EXPECTED) {
+    } elsif ($suc == SUCCESS_EXPECTED or $suc == FAILURE_EXPECTED
+             or $suc == ERROR_EXPECTED) {
         $res = ' ok';
         if ($suc == FAILURE_EXPECTED) {
             $res = ' expected failure';
+            $failed++;
+            $expected++;
+        } elsif ($suc == ERROR_EXPECTED) {
+            $res = ' expected crash';
             $failed++;
             $expected++;
         }

@@ -15,7 +15,7 @@ use constant {
     FAILURE_UNEXPECTED => 1,
     SUCCESS_UNEXPECTED => 2,
     FAILURE_EXPECTED => 3,
-    FAILURE_ERROR => 4,
+    ERROR_EXPECTED => 4,
 };
 
 use Carp qw(croak);
@@ -30,7 +30,7 @@ our @EXPORT = qw(
       FAILURE_UNEXPECTED
       SUCCESS_UNEXPECTED
       FAILURE_EXPECTED
-      FAILURE_ERROR
+      ERROR_EXPECTED
 );
 
 my $DEFAULT_ARCH = 'i386';
@@ -126,11 +126,21 @@ sub run {
     $exp->read ("$rundir/expected");
 
     while (1) {
-        system_file ("$rundir/log.txt", $cmd) == 0 or
-            croak "$britney died with  ". (($?>>8) & 0xff);
         my $res = Expectation->new;
         my $lres;
         my $fixp = 0;
+        my $s = system_file("$rundir/log.txt", $cmd);
+        if ($s) {
+            if ($impl && exists($self->{'failures'}{lc $impl})) {
+                my $ex = $self->{'failures'}{lc $impl};
+                if ($ex eq 'crash') {
+                    return (ERROR_EXPECTED, $i) if wantarray;
+                    return ERROR_EXPECTED;
+                }
+                croak "$britney died with  ". (($?>>8) & 0xff);
+            }
+        }
+
 
         $res->read ("$rundir/var/data/output/HeidiResult");
         if ( -e "$rundir/var/data/output/HeidiResult-$i") {
@@ -176,10 +186,15 @@ sub run {
             last;
         }
     }
-    if ($impl and exists $self->{'failures'}->{lc $impl}) {
-        # The implementation is expected to fail
+    if ($impl and exists $self->{'failures'}{lc $impl}) {
+        my $ex = $self->{'failures'}{lc $impl};
+        # The implementation is expected to fail or crash, so any
+        # success is "unexpected"
         $result = SUCCESS_UNEXPECTED if $result == SUCCESS_EXPECTED;
-        $result = FAILURE_EXPECTED if $result == FAILURE_UNEXPECTED;
+        if ($result == FAILURE_UNEXPECTED && $ex ne 'crash') {
+            # We were expected to fail here.
+            $result = FAILURE_EXPECTED;
+        }
     }
     return wantarray ? ($result, $i) : $result;
 }
@@ -229,8 +244,15 @@ sub _read_test_data {
     close $fd;
     $self->{'testdata'} = shift @para;
     if ($self->{'testdata'}->{'expected-failure'}) {
-        my $rawfield = $self->{'testdata'}->{'expected-failure'};
-        my %impl = map { $_ => 1 } grep { $_ } split m/(\s++|\n)++/o, $rawfield;
+        my $rawfield = $self->{'testdata'}{'expected-failure'};
+        my %impl;
+        for my $entry (grep { $_ } split(m/(?:\s++|\n)++/o, $rawfield)) {
+            my $ex = 'failure';
+            if (index($entry, '=') > -1) {
+                ($entry, $ex) = split('=', $entry, 2);
+            }
+            $impl{lc $entry} = $ex;
+        }
         $self->{'failures'} = \%impl;
     }
 }
