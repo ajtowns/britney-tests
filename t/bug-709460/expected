@@ -1,0 +1,4 @@
+llvm-3.2-doc 3.2-5 all
+llvm-3.2-arch 3.2-5+b1 i386
+llvm-3.2-arch 3.2-5+b1 amd64
+llvm-3.2 3.2-5 source

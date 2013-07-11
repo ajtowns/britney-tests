@@ -1,0 +1,13 @@
+Package: llvm-3.2-doc
+Source: llvm-3.2
+Version: 3.2-5
+Architecture: all
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: llvm-3.2-arch
+Source: llvm-3.2
+Version: 3.2-5
+Architecture: amd64
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel

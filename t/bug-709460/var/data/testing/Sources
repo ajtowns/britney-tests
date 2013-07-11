@@ -1,0 +1,5 @@
+Package: llvm-3.2
+Binaries: llvm-3.2-doc llvm-3.2-arch
+Version: 3.2-5
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
