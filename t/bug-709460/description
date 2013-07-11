@@ -11,7 +11,7 @@ Observed during a run on release.d.o.  The situation:
       previously built llvm-3.2)
   * llvm-3.2 was binNMU'ed and the binNMU migrates during the run.
 
-The first problem is that llvm-3.2-doc/1:3.2repack-6 ends up in the
-"testing".  The second problem is that the binary ends up in testing
+The first problem is that llvm-3.2-doc/1:3.2repack-6 ends up in
+testing.  The second problem is that the binary ends up in testing
 without it source package.  As Britney does "binary->source"-lookups
 later, the absence of this source package causes a crash.
