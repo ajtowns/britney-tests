@@ -2,27 +2,23 @@ Package: leaf-a1
 Binary: leaf-a1
 Version: 1.0-2
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 
 Package: leaf-a2
 Binary: leaf-a2
 Version: 1.0-2
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 
 Package: leaf-b
 Binary: leaf-b
 Version: 1.0-2
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 
 Package: root
 Binary: root
 Version: 1.0-2
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 

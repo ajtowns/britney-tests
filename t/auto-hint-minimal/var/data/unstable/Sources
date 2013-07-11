@@ -2,27 +2,23 @@ Package: a
 Binary: bin-a
 Version: 1.1-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 
 Package: b
 Binary: bin-b
 Version: 1.1-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 
 Package: c
 Binary: bin-c
 Version: 1.1-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 
 Package: z
 Binary: bin-z
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 

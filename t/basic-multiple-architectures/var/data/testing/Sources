@@ -2,20 +2,17 @@ Package: amd64-only
 Binary: amd64-only
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 
 Package: arch-any
 Binary: arch-any
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 
 Package: i386-ported
 Binary: i386-ported
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
 

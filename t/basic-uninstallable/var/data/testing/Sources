@@ -8,5 +8,4 @@ Package: some-src
 Binary: some-bin1, some-bin2
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel

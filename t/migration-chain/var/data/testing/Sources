@@ -2,5 +2,4 @@ Package: src-root
 Binary: pkg-root
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Standards-Version: 3.9.2
 Section: devel
