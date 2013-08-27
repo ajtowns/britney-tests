@@ -1,0 +1,6 @@
+Package: source
+Binary: binary
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+

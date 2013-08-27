@@ -1,0 +1,14 @@
+Source packages takes the blame for RC bugs when binary is missing
+
+This is a safe-guard to ensure that we do not rely on implementation
+details of the Debian BTS.  Basically, if you have a source package
+src:X that builds Y.  If someone files a bug against the binary
+package X (which does not exist), the BTS seems to do the right thing
+and have it affect src:X.
+
+We are not actually sure that bug will be exported as affecting src:X
+or just X.  But live-data suggests that such a bug will trigger the
+latter case.  So we ensure that Britney blames source packages, if
+there are no binaries to take the blame.
+
+Related Britney bug: #697602
