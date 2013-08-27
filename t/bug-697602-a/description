@@ -1,0 +1,6 @@
+Check that britney properly handles "X builds Y" and "Y builds X" case
+
+Check that when a package Y is RC buggy, it does not affect the source
+package unless said source package builds Y.
+
+Related Britney bug: #697602
