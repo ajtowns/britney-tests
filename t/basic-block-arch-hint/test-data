@@ -1,2 +1,2 @@
 Architectures: i386 amd64
-Expected-Failure: britney2 sat-britney
+Expected-Failure: britney2=crash sat-britney
