@@ -50,7 +50,7 @@ if ($opt{'sat-britney'}) {
 
 
 
-my ($britney, $TESTSET, $RUNDIR) = @ARGV;
+my ($britney, $TESTSET, $RUNDIR, $testname) = @ARGV;
 
 my @tests;
 my $failed = 0;
@@ -58,7 +58,7 @@ my $expected = 0;
 my $unexpected = 0;
 my $errors = 0;
 
-die "Usage: $prog <britney> <testset> <rundir>\n"
+die "Usage: $prog <britney> <testset> <rundir> [<testname>|</regex/>]\n"
     unless $britney && $TESTSET && $RUNDIR;
 die "Testset \"$TESTSET\" does not exists\n"
     unless -d $TESTSET;
@@ -66,9 +66,31 @@ die "Testset \"$TESTSET\" does not exists\n"
 my ($ts, $tf) = _load_timer();
 
 mkdir $RUNDIR, 0777 or die "mkdir $RUNDIR: $!\n";
-opendir my $dd, $TESTSET or die "opendir $TESTSET: $!\n";
-@tests = grep { !/^\./o } sort readdir $dd;
-close $dd;
+if (defined($testname) and substr($testname, 0, 1) ne '/') {
+    if (not -d "$TESTSET/$testname") {
+        die "No test named $testname - did you mean /$testname/\n";
+    }
+    @tests = ($testname);
+} else {
+    my $match = qr/./;
+    if (defined($testname)) {
+        if (    substr($testname, 0, 1) eq '/'
+            and substr($testname, -1, 1) eq '/') {
+            my $regex = substr($testname, 1, length($testname) -2);
+            $match = qr/$regex/;
+        } else {
+            die("The filter regex must start and end with \"/\"\n");
+        }
+    }
+    opendir(my $dd, $TESTSET) or die("opendir $TESTSET: $!\n");
+    @tests = grep { !/^\./o and /$match/ } sort readdir $dd;
+    close($dd);
+}
+
+if (not @tests) {
+    print STDERR "No tests named/matched $testname\n";
+    exit(0);
+}
 
 foreach my $t (@tests) {
     my $o = {'fixed-point' => $opt{'fixed-point'}};
@@ -130,7 +152,7 @@ exit 0;
 sub _usage {
 
     print <<EOF ;
-Usage: $prog [options] <britney> <testset> <rundir>
+Usage: $prog [options] <britney> <testset> <rundir> [<testname>|</regex/>]
 
 Runs the <britney> on a test suite (specified as the <testset>
 directory).  The output is stored in the <rundir> directory, which
@@ -142,6 +164,10 @@ must not exists.
                  With --keep-going, the test continues even if Britney returns
                  a non-zero error code.  Otherwise, it terminates on first
                  error.
+
+If <testname> or </regex/> is given, only the test named <testname> or
+tests matching </regex/> (respectively) will be run.  Note that the
+regex must start and end with "/".
 
 Note that --fixed-point is only guaranteed to terminate if the britney
 implementation behaves as a function with an attractive fixed point.
