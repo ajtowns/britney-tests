@@ -329,10 +329,11 @@ TPU               = $datadir/testing-proposed-updates
 UNSTABLE          = $datadir/unstable
 
 # Output
-NONINST_STATUS    = $outputdir/non-installable-status
-EXCUSES_OUTPUT    = $outputdir/excuses.html
-UPGRADE_OUTPUT    = $outputdir/output.txt
-HEIDI_OUTPUT      = $outputdir/HeidiResult
+NONINST_STATUS      = $outputdir/non-installable-status
+EXCUSES_OUTPUT      = $outputdir/excuses.html
+UPGRADE_OUTPUT      = $outputdir/output.txt
+HEIDI_OUTPUT        = $outputdir/HeidiResult
+EXCUSES_YAML_OUTPUT = $outputdir/excuses.yaml
 
 # List of release architectures
 ARCHITECTURES     = $archs
