@@ -1,0 +1,15 @@
+Package: some-package
+Source: src1
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Provides: virtual-abi-sid
+Architecture: i386
+Section: devel
+
+Package: depender
+Source: src2
+Version: 1.0-2
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: virtual-abi-sid
+Architecture: i386
+Section: devel

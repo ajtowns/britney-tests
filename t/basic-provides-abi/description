@@ -1,0 +1,5 @@
+Basic "x provides ABI 1 in testing and ABI 2 in sid" case
+
+This is a sample case where a package x provides a virtual ABI package
+that changes.  This case is to trigger a certain codeflow in the
+Britney2 implementation.

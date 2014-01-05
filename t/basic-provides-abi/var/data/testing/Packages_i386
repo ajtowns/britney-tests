@@ -1,0 +1,15 @@
+Package: some-package
+Source: src1
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Provides: virtual-abi-testing
+Architecture: i386
+Section: devel
+
+Package: depender
+Source: src2
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: virtual-abi-testing
+Architecture: i386
+Section: devel
