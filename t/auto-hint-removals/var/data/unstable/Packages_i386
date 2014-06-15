@@ -1,0 +1,7 @@
+Package: random-pkg
+Source: random-pkg (1.0-1)
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+

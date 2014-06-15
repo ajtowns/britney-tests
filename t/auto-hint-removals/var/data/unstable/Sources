@@ -1,0 +1,5 @@
+Package: random-pkg
+Binary: random-pkg
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel

@@ -1,0 +1,16 @@
+Package: removed-pkgA
+Source: removed-pkgA
+Version: 1.0-1
+Depends: removed-pkgB
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+
+Package: removed-pkgB
+Source: removed-pkgB
+Version: 1.0-1
+Depends: removed-pkgA
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+

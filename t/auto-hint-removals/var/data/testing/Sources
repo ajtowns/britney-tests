@@ -1,0 +1,11 @@
+Package: removed-pkgA
+Binary: removed-pkgA
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: removed-pkgB
+Binary: removed-pkgB
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
