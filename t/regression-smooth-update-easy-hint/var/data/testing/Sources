@@ -1,0 +1,11 @@
+Package: libtest
+Binary: libtest1, libtest-data
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: libs
+
+Package: binnmu-pkg
+Binary: binnmu-pkg
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel

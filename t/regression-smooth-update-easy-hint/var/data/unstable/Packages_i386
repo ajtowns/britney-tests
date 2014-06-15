@@ -1,0 +1,23 @@
+Package: libtest2
+Source: libtest
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Depends: libtest-data (= 2.0-1)
+Section: libs
+
+Package: libtest-data
+Source: libtest
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+
+Package: binnmu-pkg
+Source: binnmu-pkg (1.0-1)
+Version: 1.0-1+b1
+Depends: libtest2 (>= 2.0)
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+

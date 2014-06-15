@@ -1,0 +1,6 @@
+Ensure that "smooth-updates" does not break "easy"-hints
+
+In some cases, a smooth-update could break an "easy"-hint, if the hint
+was in the "wrong" order.  This is a test case, to ensure that problem
+does not reappear.
+
