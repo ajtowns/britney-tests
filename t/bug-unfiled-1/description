@@ -1,0 +1,13 @@
+Unfiled bug caused by broken code - seen live
+
+This was seen live 12th of July 2014 when trying to migrating
+gnustep-back.
+
+Basically, this test suite is "basic-smooth-updates" except it has one
+more lib being smooth-updated (only to satisfy the dependency of the
+another library being smooth-updated as well).
+
+
+If your interested in the case, look for
+MID:<E1X65ZF-0005Kt-F3@franck.debian.org> in the
+britney@release.debian.org archives.

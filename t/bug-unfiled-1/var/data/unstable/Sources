@@ -1,0 +1,18 @@
+Package: libtest
+Binary: libtest2, libtest2-extra
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: libs
+
+Package: binnmu-pkg
+Binary: binnmu-pkg
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: ood-pkg
+Binary: ood-pkg
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
