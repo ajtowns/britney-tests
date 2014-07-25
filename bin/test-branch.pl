@@ -67,6 +67,10 @@ my $diffs = 0;
 my %it = ();
 my %accrt = ();
 my $errors = 0;
+my %crashes = (
+    'test' => 0,
+    'orig' => 0,
+);
 my %failed = (
     'test' => 0,
     'orig' => 0,
@@ -144,6 +148,10 @@ foreach my $t (@tests) {
                 $failed{$reviewed}++;
                 $expected{$reviewed}++;
             }
+        } elsif ($suc == ERROR_EXPECTED) {
+            $crashes{$reviewed}++;
+            $expected{$reviewed}++;
+            $res = ' expected crash';
         } else {
             $res = ' FAILED';
             if ($suc == SUCCESS_UNEXPECTED) {
@@ -189,11 +197,11 @@ foreach my $t (@tests) {
 print "\nSummary:\n";
 print 'Ran ' . scalar (@tests) . " tests\n";
 print "$opt{'orig-branch'} had unexpected successes: $unexpected{'orig'}\n" if $unexpected{'orig'};
-print "$opt{'orig-branch'} failed $failed{'orig'} tests\n" if $failed{'orig'};
-print " - of which $expected{'orig'} where expected\n" if $expected{'orig'};
+print "$opt{'orig-branch'} failed $failed{'orig'} tests and crashed on $crashes{'orig'} tests\n" if $failed{'orig'} or $crashes{'orig'};
+print " - Expected $expected{'orig'} crashes/failures\n" if $expected{'orig'};
 print "$opt{'test-branch'} had unexpected successes: $unexpected{'test'}\n" if $unexpected{'test'};
-print "$opt{'test-branch'} failed $failed{'test'} tests\n" if $failed{'test'};
-print " - of which $expected{'test'} where expected\n" if $expected{'test'};
+print "$opt{'test-branch'} failed $failed{'test'} tests and crashed on $crashes{'test'} tests\n" if $failed{'test'} or $crashes{'test'};
+print " - Expected $expected{'test'} crashes/failures\n" if $expected{'test'};
 print "There were $diffs test(s) where the two branches both failed and produced different results\n"
     if $diffs;
 print "There were $errors tests with errors\n" if $errors;
@@ -202,8 +210,8 @@ print "There were $errors tests with errors\n" if $errors;
 exit 2 if $errors;
 # Exit 1 if there were diffs, unexpected results or more failures than expected.
 exit 1 if $diffs or $unexpected{'orig'} or $unexpected{'test'};
-exit 1 if $failed{'orig'} > $expected{'orig'};
-exit 1 if $failed{'test'} > $expected{'test'};
+exit 1 if $failed{'orig'} + $crashes{'orig'} > $expected{'orig'};
+exit 1 if $failed{'test'} + $crashes{'test'} > $expected{'test'};
 # else everything is fine.
 exit 0;
 
