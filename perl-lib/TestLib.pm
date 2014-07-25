@@ -7,6 +7,7 @@ package TestLib;
 
 use strict;
 use warnings;
+use autodie;
 
 use Carp qw(croak);
 
@@ -39,6 +40,32 @@ sub gen_dates_urgencies {
 
     close $df or croak "closing $testingdir/Dates: $!";
     close $uf or croak "closing $testingdir/Urgency: $!";
+}
+
+sub find_tests {
+    my ($testset, $testname) = @_;
+    my @tests;
+    if (defined($testname) and substr($testname, 0, 1) ne '/') {
+        if (not -d "$testset/$testname") {
+            die "No test named $testname - did you mean /$testname/\n";
+        }
+        @tests = ($testname);
+    } else {
+        my $match = qr/./;
+        if (defined($testname)) {
+            if (    substr($testname, 0, 1) eq '/'
+                    and substr($testname, -1, 1) eq '/') {
+                my $regex = substr($testname, 1, length($testname) -2);
+                $match = qr/$regex/;
+            } else {
+                die("The filter regex must start and end with \"/\"\n");
+            }
+        }
+        opendir(my $dd, $testset);
+        @tests = grep { !/^\./o and /$match/ } sort readdir($dd);
+        closedir($dd);
+    }
+    return @tests;
 }
 
 1;

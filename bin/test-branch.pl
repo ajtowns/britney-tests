@@ -15,6 +15,7 @@ use lib "$ENV{'TEST_ROOT'}/perl-lib";
 
 use BritneyTest;
 use Expectation;
+use TestLib;
 use Getopt::Long;
 
 my %opt = (
@@ -59,7 +60,7 @@ if ($opt{'sat-britney'}) {
     $ENV{'PYTHONDONTWRITEBYTECODE'} = 1;
 }
 
-my ($britney, $TESTSET, $RUNDIR) = @ARGV;
+my ($britney, $TESTSET, $RUNDIR, $testname) = @ARGV;
 
 my @tests;
 my $diffs = 0;
@@ -79,7 +80,7 @@ my %unexpected = (
     'orig' => 0,
 );
 
-die "Usage: $prog <britney> <testset> <rundir>\n"
+die "Usage: $prog <britney> <testset> <rundir> [<testname>|</regex/>]\n"
     unless $britney && $TESTSET && $RUNDIR;
 die "Testset \"$TESTSET\" does not exists\n"
     unless -d $TESTSET;
@@ -102,9 +103,12 @@ mkdir $RUNDIR, 0777 or die "mkdir $RUNDIR: $!\n";
 mkdir "$RUNDIR/orig", 0777 or die "mkdir $RUNDIR/orig: $!\n";
 mkdir "$RUNDIR/test", 0777 or die "mkdir $RUNDIR/test: $!\n";
 
-opendir my $dd, $TESTSET or die "opendir $TESTSET: $!\n";
-@tests = grep { !/^\./o } sort readdir $dd;
-close $dd;
+
+@tests = TestLib::find_tests($TESTSET, $testname);
+if (not @tests) {
+    print STDERR "No tests named/matched $testname\n";
+    exit(0);
+}
 
 foreach my $t (@tests) {
     my %fail = ();

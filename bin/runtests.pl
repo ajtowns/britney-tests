@@ -14,6 +14,7 @@ BEGIN {
 use lib "$ENV{'TEST_ROOT'}/perl-lib";
 
 use BritneyTest;
+use TestLib;
 use Getopt::Long;
 
 my %opt = (
@@ -66,26 +67,7 @@ die "Testset \"$TESTSET\" does not exists\n"
 my ($ts, $tf) = _load_timer();
 
 mkdir $RUNDIR, 0777 or die "mkdir $RUNDIR: $!\n";
-if (defined($testname) and substr($testname, 0, 1) ne '/') {
-    if (not -d "$TESTSET/$testname") {
-        die "No test named $testname - did you mean /$testname/\n";
-    }
-    @tests = ($testname);
-} else {
-    my $match = qr/./;
-    if (defined($testname)) {
-        if (    substr($testname, 0, 1) eq '/'
-            and substr($testname, -1, 1) eq '/') {
-            my $regex = substr($testname, 1, length($testname) -2);
-            $match = qr/$regex/;
-        } else {
-            die("The filter regex must start and end with \"/\"\n");
-        }
-    }
-    opendir(my $dd, $TESTSET) or die("opendir $TESTSET: $!\n");
-    @tests = grep { !/^\./o and /$match/ } sort readdir $dd;
-    close($dd);
-}
+@tests = TestLib::find_tests($TESTSET, $testname);
 
 if (not @tests) {
     print STDERR "No tests named/matched $testname\n";
