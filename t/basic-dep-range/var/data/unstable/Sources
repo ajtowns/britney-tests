@@ -1,0 +1,12 @@
+Package: pkg-a
+Binary: pkg-a
+Version: 2.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+
+Package: pkg-b
+Binary: pkg-b
+Version: 1.0-1
+Section: devel
+Maintainer: The R-Team <debian-release@lists.debian.org>
+

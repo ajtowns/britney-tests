@@ -1,0 +1,4 @@
+pkg-a 1.0-1 i386
+pkg-b 1.0-1 i386
+pkg-a 1.0-1 source
+pkg-b 1.0-1 source

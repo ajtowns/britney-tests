@@ -1,0 +1,13 @@
+Package: pkg-a
+Section: devel
+Architecture: i386
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 2.0-1
+
+Package: pkg-b
+Section: devel
+Architecture: i386
+Depends: pkg-a (>= 1.0), pkg-a (<< 2.0~)
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Version: 1.0-1
+
