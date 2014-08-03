@@ -19,6 +19,7 @@ sub system_file {
     open my $fd, '>', $file or die "open $file: $!";
     my $pid = open my $cd, '-|';
     my $res;
+    $fd->autoflush;
     die "fork failed: $!" unless defined $pid;
     $ENV{PERLLIB} = join ':',@INC;
     unless ($pid) {
@@ -42,6 +43,8 @@ sub system_file {
         # re-direct STDERR to STDOUT and exec
         close STDERR;
         open(STDERR, '>&', \*STDOUT) or die "reopen stderr: $!";
+        STDOUT->autoflush;
+        STDERR->autoflush;
         exec @$cmd or die "exec @$cmd failed: $!";
     }
 
