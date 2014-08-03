@@ -1,0 +1,12 @@
+hint-a 2.0-1 i386
+hint-b 2.0-1 i386
+thunar-data 2.0-1 i386
+libthunar-vfs-1-2 2.0-1 i386
+libthunar-vfs-rdep 1.0-1 i386
+
+hint-a 2.0-1 source
+hint-b 2.0-1 source
+thunar 2.0-1 source
+thunar-vfs 2.0-1 source
+libthunar-vfs-rdep 1.0-1 source
+

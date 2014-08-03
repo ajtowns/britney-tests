@@ -1,0 +1,29 @@
+Package: hint-a
+Binary: hint-a
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: hint-b
+Binary: hint-b
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: thunar
+Binary: thunar-data
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: thunar-vfs
+Binary: libthunar-vfs-1-2
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
+
+Package: libthunar-vfs-rdep
+Binary: libthunar-vfs-rdep
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel

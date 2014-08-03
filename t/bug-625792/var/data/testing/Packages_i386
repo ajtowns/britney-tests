@@ -1,0 +1,36 @@
+Package: hint-a
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: hint-b (>= 1.0), hint-b (<< 2.0)
+Architecture: i386
+Section: devel
+
+Package: hint-b
+Version: 1.0-1
+Depends: hint-a (>= 1.0), hint-a (<< 2.0)
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+
+Package: thunar-data
+Source: thunar
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: hint-b (>= 1.0), hint-b (<< 2.0)
+Architecture: i386
+Section: devel
+
+Package: libthunar-vfs-1-2
+Source: thunar-vfs
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: hint-b (>= 1.0), thunar-data (>= 1.0), thunar-data (<< 2.0)
+Architecture: i386
+Section: devel
+
+Package: libthunar-vfs-rdep
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Depends: libthunar-vfs-1-2
+Architecture: i386
+Section: devel
