@@ -1,0 +1,32 @@
+Package: test-bin1
+Source: test-src
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Depends: some-bin1
+Section: devel
+
+Package: test-bin2
+Source: test-src
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Depends: some-bin1
+Breaks: some-bin2 (<< 2.0)
+
+Package: some-bin1
+Source: some-src
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Depends: test-bin1 (>= 2.0)
+
+Package: some-bin2
+Source: some-src
+Version: 1.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+Depends: test-bin2

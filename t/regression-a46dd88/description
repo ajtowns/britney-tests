@@ -1,0 +1,12 @@
+Regression: nuninst counters not always being updated during hints
+
+This minor regression was introduced in commit a46dd88.
+
+To trigger the bug, a hint had to do an uninstallability trade
+(i.e. trade one uninstallable package for another) AND the original
+uninstallability package had to be "fixed" by being removed from
+testing.
+
+The flaw could only be triggered via a hint (in the "non-recurse"
+part), since "recurse" runs did not have this bug.
+
