@@ -1,0 +1,7 @@
+Package: arch-any
+Source: test-src (1.0-1)
+Version: 1.0-1+b1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: ppc64el
+Section: devel
+

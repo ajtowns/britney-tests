@@ -1,0 +1,16 @@
+Package: arch-any
+Source: test-src
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: i386
+Section: devel
+
+Package: arch-all
+Source: test-src
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Architecture: all
+Section: devel
+
+
+

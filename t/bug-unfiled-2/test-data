@@ -1,0 +1,2 @@
+Architectures: i386 ppc64el
+Expected-Failure: britney2=crash

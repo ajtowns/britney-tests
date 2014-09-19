@@ -1,0 +1,5 @@
+Package: test-src
+Binary: arch-any, arch-all
+Version: 2.0-1
+Maintainer: The R-Team <debian-release@lists.debian.org>
+Section: devel
