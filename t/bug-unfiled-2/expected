@@ -1,5 +1,4 @@
-arch-all 2.0-1 i386
-arch-all 2.0-1 ppc64el
+arch-all 2.0-1 all
 arch-any 2.0-1 i386
 arch-any 2.0-1 ppc64el
 test-src 2.0-1 source
