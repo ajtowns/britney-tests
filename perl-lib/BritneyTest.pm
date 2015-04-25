@@ -144,7 +144,7 @@ sub run {
 
 
         if ( ! -f $heidi) {
-            croak("$britney did not produce a HeidiResult at ${heidi} - perhaps a silent failure!?\n");
+            croak("$britney did not produce a HeidiResult at ${heidi} - perhaps a silent failure!?");
         }
         $res->read($heidi);
         if ( -e "$rundir/var/data/output/HeidiResult-$i") {
