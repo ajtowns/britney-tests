@@ -10,6 +10,8 @@ use warnings;
 
 use base 'Exporter';
 
+use POSIX qw(nice);
+
 use constant MIN_OOM_ADJ => 0;
 
 our @EXPORT = (qw(system_file));
@@ -41,6 +43,8 @@ sub system_file {
             }
 
         }
+        # Try to apply nice-ness, but if it fails then ignore it.
+        nice(10) or 1;
         # re-direct STDERR to STDOUT and exec
         close STDERR;
         open(STDERR, '>&', \*STDOUT) or die "reopen stderr: $!";
