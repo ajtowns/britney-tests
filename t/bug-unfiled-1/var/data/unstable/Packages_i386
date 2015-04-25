@@ -24,7 +24,7 @@ Section: devel
 Package: ood-pkg
 Source: ood-pkg
 Version: 1.0-1
-Depends: libtest1 (>= 1.0)
+Depends: libtest1-extra (>= 1.0)
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
