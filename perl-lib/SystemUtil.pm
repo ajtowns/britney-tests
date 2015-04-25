@@ -19,7 +19,7 @@ our @EXPORT = (qw(system_file));
 sub system_file {
     my ($file, $cmd) = @_;
     open my $fd, '>', $file or die "open $file: $!";
-    my $pid = open my $cd, '-|';
+    my $pid = fork;
     my $res;
     $fd->autoflush;
     die "fork failed: $!" unless defined $pid;
@@ -33,7 +33,7 @@ sub system_file {
                 or die "open oom_adj: $!";
             my $score = <$oom_fd>;
             chomp($score);
-            close($fd) or die "close oom_adj: $!";
+            close($oom_fd) or die "close oom_adj: $!";
             if ($score < MIN_OOM_ADJ) {
                 # Re-open oom_adj (it doesn't like seeking)
                 open($oom_fd,  '>', '/proc/self/oom_adj')
@@ -46,20 +46,14 @@ sub system_file {
         # Try to apply nice-ness, but if it fails then ignore it.
         nice(10) or 1;
         # re-direct STDERR to STDOUT and exec
-        close STDERR;
+        open(STDOUT, '>&', $fd) or die "reopen stdout: $!";
         open(STDERR, '>&', \*STDOUT) or die "reopen stderr: $!";
         STDOUT->autoflush;
         STDERR->autoflush;
         exec @$cmd or die "exec @$cmd failed: $!";
     }
-
-    while (my $line = <$cd>) {
-        print $fd $line;
-    }
-    close $cd;
-    $res = $?;
-    close $fd or die "closing $file: $!";
-    return $res;
+    waitpid($pid, 0) == $pid or die("waitpid($pid, 0) failed: $!");
+    return $?;
 }
 
 
