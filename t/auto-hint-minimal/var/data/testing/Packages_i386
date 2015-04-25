@@ -24,6 +24,7 @@ Section: devel
 Package: bin-z
 Source: z
 Version: 1.0-1
+Depends: bin-c
 Maintainer: The R-Team <debian-release@lists.debian.org>
 Architecture: i386
 Section: devel
