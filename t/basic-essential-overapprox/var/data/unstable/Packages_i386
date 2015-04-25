@@ -2,7 +2,7 @@ Package: test
 Source: test-src
 Version: 1.0-1
 Maintainer: The R-Team <debian-release@lists.debian.org>
-Depends: libtest1
+Depends: libtest1, awk
 Architecture: i386
 Section: devel
 Essential: yes
