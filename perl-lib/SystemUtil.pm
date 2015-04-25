@@ -22,6 +22,7 @@ sub system_file {
     $fd->autoflush;
     die "fork failed: $!" unless defined $pid;
     $ENV{PERLLIB} = join ':',@INC;
+    $ENV{PYTHONHASHSEED} = 'random' if not exists($ENV{PYTHONHASHSEED});
     unless ($pid) {
         # child - [Linux] Ensure that the OOM killer considers
         # us a target in low memory conditions.
