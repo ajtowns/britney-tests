@@ -130,6 +130,7 @@ sub run {
         my $lres;
         my $fixp = 0;
         my $s = system_file("$rundir/log.txt", $cmd);
+        my $heidi = "$rundir/var/data/output/HeidiResult";
         if ($s) {
             if ($impl && exists($self->{'failures'}{lc $impl})) {
                 my $ex = $self->{'failures'}{lc $impl};
@@ -142,7 +143,10 @@ sub run {
         }
 
 
-        $res->read ("$rundir/var/data/output/HeidiResult");
+        if ( ! -f $heidi) {
+            croak("$britney did not produce a HeidiResult at ${heidi} - perhaps a silent failure!?\n");
+        }
+        $res->read($heidi);
         if ( -e "$rundir/var/data/output/HeidiResult-$i") {
             $lres = Expectation->new;
             $lres->read ("$rundir/var/data/output/HeidiResult-$i");
