@@ -21,6 +21,8 @@ use constant {
 use Carp qw(croak);
 use Dpkg::Control;
 
+use File::Find;
+
 use Expectation;
 use SystemUtil;
 use TestLib;
@@ -35,14 +37,10 @@ our @EXPORT = qw(
 
 my $DEFAULT_ARCH = 'i386';
 my @AUTO_CREATE_EMPTY = (
-    'var/data/testing/Sources',
-    'var/data/testing/Packages_@ARCH@',
     'var/data/testing/BugsV',
     'var/data/testing-proposed-updates/Sources',
     'var/data/testing-proposed-updates/Packages_@ARCH@',
     'var/data/testing-proposed-updates/BugsV',
-    'var/data/unstable/Sources',
-    'var/data/unstable/Packages_@ARCH@',
     'var/data/unstable/BugsV',
     'hints/test-hints',
 );
@@ -104,7 +102,7 @@ sub setup {
             symlink "../../../hints", $hintlink or croak "symlink $hintlink -> $rundir/hints: $!";
         }
         unless ( -f "$datatdir/Urgency" or -f "$datatdir/Dates" ) {
-            $self->_generate_urgency_dates ($datatdir, "$rundir/var/data/unstable/Sources");
+            $self->_generate_urgency_dates ($datatdir, "$rundir/var/data/unstable/");
         }
     }
 
@@ -262,31 +260,41 @@ sub _read_test_data {
 }
 
 sub _generate_urgency_dates {
-    my ($self, $datatdir, $sidsources) = @_;
+    my ($self, $datatdir, $siddir) = @_;
     my $urgen = "$datatdir/Test-urgency.in";
     my $dates = {};
     my $urgencies = {};
     my @sources = ();
     my $ctrl;
 
-    open my $fd, '<', $sidsources or croak "opening $sidsources: $!";
-    while ( defined ($ctrl = Dpkg::Control->new (type => CTRL_INDEX_SRC)) and
-            ($ctrl->parse ($fd, $sidsources)) ) {
-        my $source = $ctrl->{'Package'};
-        my $version = $ctrl->{'Version'};
-        croak "$sidsources contains a bad entry!"
-            unless defined $source and defined $version;
-        push @sources, [$source, $version];
-        $urgencies->{"$source/$version"} = 'low';
-        $dates->{"$source/$version"} = 1;
+    if (! -d $siddir) {
+        croak "$siddir is not a directory";
     }
-    close $fd;
+
+    my @allsidsources = ();
+    find( sub { push @allsidsources, $File::Find::name if "$_" eq "Sources"; },
+          $siddir );
+
+    for my $sidsources (@allsidsources) {
+        open my $fd, '<', $sidsources or croak "opening $sidsources: $!";
+        while ( defined ($ctrl = Dpkg::Control->new (type => CTRL_INDEX_SRC)) and
+                ($ctrl->parse ($fd, $sidsources)) ) {
+            my $source = $ctrl->{'Package'};
+            my $version = $ctrl->{'Version'};
+            croak "$sidsources contains a bad entry!"
+                unless defined $source and defined $version;
+            push @sources, [$source, $version];
+            $urgencies->{"$source/$version"} = 'low';
+            $dates->{"$source/$version"} = 1;
+        }
+        close $fd;
+    }
 
     if ( -f $urgen ) {
         # Load the urgency generation hints.
         # Britney's day begins at 3pm.
         my $bnow = int (((time / (60 * 60)) - 15) / 24);
-        open $fd, '<', $urgen or croak "opening $urgen: $!";
+        open my $fd, '<', $urgen or croak "opening $urgen: $!";
         while ( my $line = <$fd> ) {
             chomp $line;
             next if $line =~ m/^\s*(?:\#|\z)/o;
