@@ -330,6 +330,8 @@ sub _gen_britney_conf {
     my $farchs  = $data->{'fucked-architectures'}//'';
     my $barchs  = $data->{'break-architectures'}//'';
 
+    my $comps = $data->{'components'}//'';
+
     open my $fd, '>', $file or croak "$file: $!";
     # contents of the conf
     print $fd <<EOF;
@@ -339,6 +341,9 @@ sub _gen_britney_conf {
 TESTING           = $datadir/testing
 TPU               = $datadir/testing-proposed-updates
 UNSTABLE          = $datadir/unstable
+
+# Packages layout
+COMPONENTS        = $comps
 
 # Output
 NONINST_STATUS      = $outputdir/non-installable-status
